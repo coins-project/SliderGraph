@@ -10,4 +10,10 @@
 
 @interface USKViewController : UIViewController
 
+@property (weak, nonatomic) IBOutlet UIImageView *graphView;
+@property (weak, nonatomic) IBOutlet UISlider *sliderA;
+@property (weak, nonatomic) IBOutlet UISlider *sliderB;
+@property (weak, nonatomic) IBOutlet UISlider *sliderC;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *formControl;
+
 @end
