@@ -11,9 +11,20 @@
 @interface USKViewController : UIViewController
 
 @property (weak, nonatomic) IBOutlet UIImageView *graphView;
+
+
+@property (weak, nonatomic) IBOutlet UILabel *equationLabel;
 @property (weak, nonatomic) IBOutlet UISlider *sliderA;
 @property (weak, nonatomic) IBOutlet UISlider *sliderB;
 @property (weak, nonatomic) IBOutlet UISlider *sliderC;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *formControl;
+
+
+@property (weak, nonatomic) IBOutlet UILabel *equationLabel2;
+@property (weak, nonatomic) IBOutlet UISlider *sliderA2;
+@property (weak, nonatomic) IBOutlet UISlider *sliderB2;
+@property (weak, nonatomic) IBOutlet UISlider *sliderC2;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *formControl2;
+
 
 @end

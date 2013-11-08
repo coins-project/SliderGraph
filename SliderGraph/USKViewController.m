@@ -9,37 +9,43 @@
 #import "USKViewController.h"
 
 @implementation USKViewController {
-	double a, b, c;
-	double lastA, lastB, lastC;
+	double a, b, c, a2, b2, c2;
+	double lastA, lastB, lastC, lastA2, lastB2, lastC2;
 	BOOL updating;
 	
 	BOOL showGrid;
 }
 
 @synthesize graphView;
-@synthesize sliderA, sliderB, sliderC;
-@synthesize formControl;
+@synthesize equationLabel, equationLabel2;
+@synthesize sliderA, sliderB, sliderC, sliderA2, sliderB2, sliderC2;
+@synthesize formControl, formControl2;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
 	
-	sliderA.minimumValue = -10.0;
-	sliderA.maximumValue = 10.0;
-	sliderA.value = 0.0;
-	sliderB.minimumValue = -10.0;
-	sliderB.maximumValue = 10.0;
-	sliderB.value = 0.0;
-	sliderC.minimumValue = -10.0;
-	sliderC.maximumValue = 10.0;
-	sliderC.value = 0.0;
+	sliderA.minimumValue = sliderA2.minimumValue = -10.0;
+	sliderA.maximumValue = sliderA2.maximumValue = 10.0;
+	sliderA.value = sliderA2.value = 0.0;
+	sliderB.minimumValue = sliderB2.minimumValue = -10.0;
+	sliderB.maximumValue = sliderB2.maximumValue = 10.0;
+	sliderB.value = sliderB2.value = 0.0;
+	sliderC.minimumValue = sliderC2.minimumValue = -10.0;
+	sliderC.maximumValue = sliderC2.maximumValue = 10.0;
+	sliderC.value = sliderC2.value = 0.0;
 	[sliderA addTarget:self action:@selector(updateEquation:) forControlEvents:UIControlEventValueChanged];
 	[sliderB addTarget:self action:@selector(updateEquation:) forControlEvents:UIControlEventValueChanged];
 	[sliderC addTarget:self action:@selector(updateEquation:) forControlEvents:UIControlEventValueChanged];
-	
-	formControl.selectedSegmentIndex = 0;
+	[sliderA2 addTarget:self action:@selector(updateEquation:) forControlEvents:UIControlEventValueChanged];
+	[sliderB2 addTarget:self action:@selector(updateEquation:) forControlEvents:UIControlEventValueChanged];
+	[sliderC2 addTarget:self action:@selector(updateEquation:) forControlEvents:UIControlEventValueChanged];
+	formControl.selectedSegmentIndex = formControl2.selectedSegmentIndex = 0;
 	[formControl addTarget:self action:@selector(drawGraph) forControlEvents:UIControlEventValueChanged];
+	[formControl2 addTarget:self action:@selector(drawGraph) forControlEvents:UIControlEventValueChanged];
+	[self updateLabel:equationLabel];
+	[self updateLabel:equationLabel2];
 	
 	NSTimer *timer = [NSTimer timerWithTimeInterval:0.03
 											 target:self
@@ -63,19 +69,51 @@
 	if ([sender isEqual:sliderA]) {
 		lastA = a;
 		a = sliderA.value;
+		[self updateLabel:equationLabel];
 	} else if ([sender isEqual:sliderB]) {
 		lastB = b;
 		b = sliderB.value;
+		[self updateLabel:equationLabel];
 	} else if ([sender isEqual:sliderC]) {
 		lastC = c;
 		c = sliderC.value;
+		[self updateLabel:equationLabel];
+	} else if ([sender isEqual:sliderA2]) {
+		lastA2 = a2;
+		a2 = sliderA2.value;
+		[self updateLabel:equationLabel2];
+	} else if ([sender isEqual:sliderB2]) {
+		lastB2 = b2;
+		b2 = sliderB2.value;
+		[self updateLabel:equationLabel2];
+	} else if ([sender isEqual:sliderC2]) {
+		lastC2 = c2;
+		c2 = sliderC2.value;
+		[self updateLabel:equationLabel2];
+	}
+}
+
+- (void)updateLabel:(UILabel *)label
+{
+	if ([label isEqual:equationLabel]) {
+		if (formControl.selectedSegmentIndex == 0) {
+			equationLabel.text = [NSString stringWithFormat:@"y = %+2.2fx^2 %+2.2fx %+2.2f", a, b, c];
+		} else {
+			equationLabel.text = [NSString stringWithFormat:@"y = %+2.2f(x %+2.2f)^2 %+2.2f", a, b, c];
+		}
+	} else if ([label isEqual:equationLabel2]) {
+		if (formControl2.selectedSegmentIndex == 0) {
+			equationLabel2.text = [NSString stringWithFormat:@"y = %+2.2fx^2 %+2.2fx %+2.2f", a2, b2, c2];
+		} else {
+			equationLabel2.text = [NSString stringWithFormat:@"y = %+2.2f(x %+2.2f)^2 %+2.2f", a2, b2, c2];
+		}
 	}
 }
 
 - (void)updateGraphView
 {
 	if (updating
-		|| (a == lastA && b == lastB && c == lastC)) {
+		|| (a == lastA && b == lastB && c == lastC && a2 == lastA2 && b2 == lastB2 && c2 == lastC2) ) {
 		return;
 	} else {
 		updating = YES;
@@ -85,6 +123,9 @@
 		lastA = a;
 		lastB = b;
 		lastC = c;
+		lastA2 = a2;
+		lastB2 = b2;
+		lastC2 = c2;
 		updating = NO;
 	}
 }
@@ -121,12 +162,11 @@
 	}
 	CGContextStrokePath(context);
 	
-	// plot
-	CGColorRef plotColor = [[UIColor yellowColor] CGColor];
+	// plot 1
+	CGColorRef plotColor = [[UIColor greenColor] CGColor];
 	CGContextSetLineWidth(context, 4.0);
 	switch (formControl.selectedSegmentIndex) {
-		case 0:
-		{
+		case 0: // general form
 			CGContextMoveToPoint(context, 0, -((a * pow(-10, 2) + b * (-10) + c) / valuePerPixel) + graphView.frame.size.height / 2.0);
 			for (int j = 1; j <= graphView.frame.size.width; j += 2) {
 				double x = (double)j / graphView.frame.size.width * 20.0 - 10;
@@ -137,30 +177,58 @@
 			CGContextSetStrokeColorWithColor(context, plotColor);
 			CGContextStrokePath(context);
 			break;
-		}
-		case 1:
-		{
-			double k = 0.2;
-			CGContextMoveToPoint(context, 0, -((k * pow((-10 - a), 2) + b) / valuePerPixel) + graphView.frame.size.height / 2.0);
+		case 1: // standard form
+			CGContextMoveToPoint(context, 0, -((a * pow((-10 + b), 2) + c) / valuePerPixel) + graphView.frame.size.height / 2.0);
 			for (int j = 1; j <= graphView.frame.size.width; j += 2) {
 				double x = (double)j / graphView.frame.size.width * 20.0 - 10;
-				double y = k * pow((x - a), 2) + b;
+				double y = a * pow((x + b), 2) + c;
 				int i = -(y / valuePerPixel) + graphView.frame.size.height / 2.0;
 				CGContextAddLineToPoint(context, j, i);
 			}
 			CGContextSetStrokeColorWithColor(context, plotColor);
 			CGContextStrokePath(context);
 			break;
+		default:
+			break;
+
+	}
+	CGContextSetStrokeColorWithColor(context, plotColor);
+	CGContextStrokePath(context);
+
+	
+	// plot 2
+	CGColorRef plotColor2 = [[UIColor redColor] CGColor];
+	CGContextSetLineWidth(context, 4.0);
+	switch (formControl2.selectedSegmentIndex) {
+		case 0: // general form
+		{
+			CGContextMoveToPoint(context, 0, -((a2 * pow(-10, 2) + b2 * (-10) + c2) / valuePerPixel) + graphView.frame.size.height / 2.0);
+			for (int j = 1; j <= graphView.frame.size.width; j += 2) {
+				double x = (double)j / graphView.frame.size.width * 20.0 - 10;
+				double y = a2 * pow(x, 2) + b2 * (x) + c2;
+				int i = -(y / valuePerPixel) + graphView.frame.size.height / 2.0;
+				CGContextAddLineToPoint(context, j, i);
+			}
+			CGContextSetStrokeColorWithColor(context, plotColor2);
+			CGContextStrokePath(context);
+			break;
+		}
+		case 1:
+		{ // standard form
+			CGContextMoveToPoint(context, 0, -((a2 * pow((-10 + b2), 2) + c2) / valuePerPixel) + graphView.frame.size.height / 2.0);
+			for (int j = 1; j <= graphView.frame.size.width; j += 2) {
+				double x = (double)j / graphView.frame.size.width * 20.0 - 10;
+				double y = a2 * pow((x + b2), 2) + c2;
+				int i = -(y / valuePerPixel) + graphView.frame.size.height / 2.0;
+				CGContextAddLineToPoint(context, j, i);
+			}
+			CGContextSetStrokeColorWithColor(context, plotColor2);
+			CGContextStrokePath(context);
+			break;
 		}
 		default:
 			break;
-	}
-	CGContextMoveToPoint(context, 0, -10.0 / valuePerPixel + graphView.frame.size.height / 2.0);
-	for (int j = 1; j <= graphView.frame.size.width; j+= 2) {
-		double x = (double)j / graphView.frame.size.width * 20.0 - 10.0;
-		double y = x;
-		int i = -(y / valuePerPixel) + graphView.frame.size.height / 2.0;
-		CGContextAddLineToPoint(context, j, i);
+			
 	}
 	CGContextSetStrokeColorWithColor(context, plotColor);
 	CGContextStrokePath(context);
@@ -169,6 +237,11 @@
 	
 	graphView.image = UIGraphicsGetImageFromCurrentImageContext();
 	UIGraphicsEndImageContext();
+}
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{
+	[self drawGraph];
 }
 
 @end

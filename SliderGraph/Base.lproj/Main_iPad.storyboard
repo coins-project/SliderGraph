@@ -31,39 +31,61 @@
                                             <segment title="General Form"/>
                                             <segment title="Standard Form"/>
                                         </segments>
+                                        <color key="tintColor" red="0.10222829133272171" green="0.77806884050369263" blue="0.015046648681163788" alpha="1" colorSpace="calibratedRGB"/>
                                     </segmentedControl>
                                     <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="UVP-f8-s6f">
                                         <rect key="frame" x="18" y="167" width="342" height="34"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="tintColor" red="0.10222829133272171" green="0.77806884050369263" blue="0.015046648681163788" alpha="1" colorSpace="calibratedRGB"/>
                                     </slider>
                                     <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="cXi-wk-l48">
                                         <rect key="frame" x="18" y="126" width="342" height="34"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="tintColor" red="0.10222829133272171" green="0.77806884050369263" blue="0.015046648681163788" alpha="1" colorSpace="calibratedRGB"/>
                                     </slider>
                                     <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="ydr-rk-QPf">
                                         <rect key="frame" x="18" y="85" width="342" height="34"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="tintColor" red="0.10222829133272171" green="0.77806884050369263" blue="0.015046648681163788" alpha="1" colorSpace="calibratedRGB"/>
                                     </slider>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="FqG-kz-jXB">
                                         <rect key="frame" x="406" y="208" width="342" height="29"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <segments>
-                                            <segment title="First"/>
-                                            <segment title="Second"/>
+                                            <segment title="General Form"/>
+                                            <segment title="Standard Form"/>
                                         </segments>
+                                        <color key="tintColor" red="0.74496722221374512" green="0.0" blue="0.040207549929618835" alpha="1" colorSpace="calibratedRGB"/>
                                     </segmentedControl>
                                     <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="YiI-vF-KcM">
                                         <rect key="frame" x="404" y="167" width="346" height="34"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="tintColor" red="0.74496722221374512" green="0.0" blue="0.040207549929618835" alpha="1" colorSpace="calibratedRGB"/>
                                     </slider>
                                     <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="gLn-jW-TV1">
                                         <rect key="frame" x="404" y="85" width="346" height="34"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="tintColor" red="0.74496722221374512" green="0.0" blue="0.040207549929618835" alpha="1" colorSpace="calibratedRGB"/>
                                     </slider>
                                     <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="tv1-Yq-RsM">
                                         <rect key="frame" x="404" y="126" width="346" height="34"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="tintColor" red="0.74496722221374512" green="0.0" blue="0.040207549929618835" alpha="1" colorSpace="calibratedRGB"/>
                                     </slider>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="y = 3x^2 + 4x - 5" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bYv-Hd-jWC">
+                                        <rect key="frame" x="20" y="20" width="338" height="57"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="TimesNewRomanPS-BoldItalicMT" family="Times New Roman" pointSize="28"/>
+                                        <color key="textColor" red="0.10222829133272171" green="0.77806884050369263" blue="0.015046648681163788" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="y = -2(x - 2)^2 + 8" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tGg-Ry-zd4">
+                                        <rect key="frame" x="406" y="20" width="342" height="57"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="TimesNewRomanPS-BoldItalicMT" family="Times New Roman" pointSize="28"/>
+                                        <color key="textColor" red="0.74496877193450928" green="0.0" blue="0.032064609229564667" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -83,11 +105,17 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="equationLabel" destination="bYv-Hd-jWC" id="L3v-fq-6QK"/>
+                        <outlet property="equationLabel2" destination="tGg-Ry-zd4" id="n9J-rc-zWc"/>
                         <outlet property="formControl" destination="Rcn-I4-pcW" id="amj-j1-kPM"/>
+                        <outlet property="formControl2" destination="FqG-kz-jXB" id="4B5-xC-l8k"/>
                         <outlet property="graphView" destination="PRd-x7-bMn" id="xNk-72-eSq"/>
                         <outlet property="sliderA" destination="ydr-rk-QPf" id="yrs-Mw-hTL"/>
+                        <outlet property="sliderA2" destination="gLn-jW-TV1" id="xXQ-3p-FhK"/>
                         <outlet property="sliderB" destination="cXi-wk-l48" id="g6g-Ph-YWJ"/>
+                        <outlet property="sliderB2" destination="tv1-Yq-RsM" id="edQ-Ek-1Ij"/>
                         <outlet property="sliderC" destination="UVP-f8-s6f" id="b80-2U-lRi"/>
+                        <outlet property="sliderC2" destination="YiI-vF-KcM" id="MAJ-Vj-yVd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
