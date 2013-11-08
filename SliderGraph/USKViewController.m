@@ -73,27 +73,27 @@
 {
 	if ([sender isEqual:sliderA]) {
 		lastA = a;
-		a = sliderA.value;
+		a = (int)(sliderA.value * 10.0) / 10.0;
 		[self updateLabel:equationLabel];
 	} else if ([sender isEqual:sliderB]) {
 		lastB = b;
-		b = sliderB.value;
+		b = (int)(sliderB.value * 10.0) / 10.0;
 		[self updateLabel:equationLabel];
 	} else if ([sender isEqual:sliderC]) {
 		lastC = c;
-		c = sliderC.value;
+		c = (int)(sliderC.value * 10.0) / 10.0;
 		[self updateLabel:equationLabel];
 	} else if ([sender isEqual:sliderA2]) {
 		lastA2 = a2;
-		a2 = sliderA2.value;
+		a2 = (int)(sliderA2.value * 10.0) / 10.0;
 		[self updateLabel:equationLabel2];
 	} else if ([sender isEqual:sliderB2]) {
 		lastB2 = b2;
-		b2 = sliderB2.value;
+		b2 = (int)(sliderB2.value * 10.0) / 10.0;
 		[self updateLabel:equationLabel2];
 	} else if ([sender isEqual:sliderC2]) {
 		lastC2 = c2;
-		c2 = sliderC2.value;
+		c2 = (int)(sliderC2.value * 10.0) / 10.0;
 		[self updateLabel:equationLabel2];
 	}
 }
@@ -102,15 +102,15 @@
 {
 	if ([label isEqual:equationLabel]) {
 		if (formControl.selectedSegmentIndex == 0) {
-			equationLabel.text = [NSString stringWithFormat:@"y = %+2.2fx^2 %+2.2fx %+2.2f", a, b, c];
+			equationLabel.text = [NSString stringWithFormat:@"y = %+2.1fx^2 %+2.1fx %+2.1f", a, b, c];
 		} else {
-			equationLabel.text = [NSString stringWithFormat:@"y = %+2.2f(x %+2.2f)^2 %+2.2f", a, b, c];
+			equationLabel.text = [NSString stringWithFormat:@"y = %+2.1f(x %+2.1f)^2 %+2.1f", a, b, c];
 		}
 	} else if ([label isEqual:equationLabel2]) {
 		if (formControl2.selectedSegmentIndex == 0) {
-			equationLabel2.text = [NSString stringWithFormat:@"y = %+2.2fx^2 %+2.2fx %+2.2f", a2, b2, c2];
+			equationLabel2.text = [NSString stringWithFormat:@"y = %+2.1fx^2 %+2.1fx %+2.1f", a2, b2, c2];
 		} else {
-			equationLabel2.text = [NSString stringWithFormat:@"y = %+2.2f(x %+2.2f)^2 %+2.2f", a2, b2, c2];
+			equationLabel2.text = [NSString stringWithFormat:@"y = %+2.1f(x %+2.1f)^2 %+2.1f", a2, b2, c2];
 		}
 	} else if ([label isKindOfClass:[UISegmentedControl class]]) {
 		[self updateLabel:equationLabel];
@@ -171,7 +171,7 @@
 	CGContextStrokePath(context);
 	
 	// plot 1
-	CGColorRef plotColor = [[UIColor greenColor] CGColor];
+	CGColorRef plotColor = [[UIColor colorWithHue:0.3 saturation:1.0 brightness:1.0 alpha:0.9] CGColor];
 	CGContextSetLineWidth(context, 4.0);
 	switch (formControl.selectedSegmentIndex) {
 		case 0: // general form
@@ -205,7 +205,7 @@
 
 	
 	// plot 2
-	CGColorRef plotColor2 = [[UIColor redColor] CGColor];
+	CGColorRef plotColor2 = [[UIColor colorWithHue:0.0 saturation:1.0 brightness:1.0 alpha:0.9] CGColor];
 	CGContextSetLineWidth(context, 4.0);
 	switch (formControl2.selectedSegmentIndex) {
 		case 0: // general form
