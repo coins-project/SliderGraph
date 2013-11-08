@@ -28,13 +28,16 @@
 	
 	sliderA.minimumValue = sliderA2.minimumValue = -10.0;
 	sliderA.maximumValue = sliderA2.maximumValue = 10.0;
-	sliderA.value = sliderA2.value = 0.0;
+	a = sliderA.value = 1.0;
+	a2 = sliderA2.value = 0.0;
 	sliderB.minimumValue = sliderB2.minimumValue = -10.0;
 	sliderB.maximumValue = sliderB2.maximumValue = 10.0;
-	sliderB.value = sliderB2.value = 0.0;
+	b = sliderB.value = -4.0;
+	b2 = sliderB2.value = 1.0;
 	sliderC.minimumValue = sliderC2.minimumValue = -10.0;
 	sliderC.maximumValue = sliderC2.maximumValue = 10.0;
-	sliderC.value = sliderC2.value = 0.0;
+	c = sliderC.value = 0.0;
+	c2 = sliderC2.value = 0.0;
 	[sliderA addTarget:self action:@selector(updateEquation:) forControlEvents:UIControlEventValueChanged];
 	[sliderB addTarget:self action:@selector(updateEquation:) forControlEvents:UIControlEventValueChanged];
 	[sliderC addTarget:self action:@selector(updateEquation:) forControlEvents:UIControlEventValueChanged];
@@ -43,7 +46,9 @@
 	[sliderC2 addTarget:self action:@selector(updateEquation:) forControlEvents:UIControlEventValueChanged];
 	formControl.selectedSegmentIndex = formControl2.selectedSegmentIndex = 0;
 	[formControl addTarget:self action:@selector(drawGraph) forControlEvents:UIControlEventValueChanged];
+	[formControl addTarget:self action:@selector(updateLabel:) forControlEvents:UIControlEventValueChanged];
 	[formControl2 addTarget:self action:@selector(drawGraph) forControlEvents:UIControlEventValueChanged];
+	[formControl2 addTarget:self action:@selector(updateLabel:) forControlEvents:UIControlEventValueChanged];
 	[self updateLabel:equationLabel];
 	[self updateLabel:equationLabel2];
 	
@@ -93,7 +98,7 @@
 	}
 }
 
-- (void)updateLabel:(UILabel *)label
+- (void)updateLabel:(id)label
 {
 	if ([label isEqual:equationLabel]) {
 		if (formControl.selectedSegmentIndex == 0) {
@@ -107,6 +112,9 @@
 		} else {
 			equationLabel2.text = [NSString stringWithFormat:@"y = %+2.2f(x %+2.2f)^2 %+2.2f", a2, b2, c2];
 		}
+	} else if ([label isKindOfClass:[UISegmentedControl class]]) {
+		[self updateLabel:equationLabel];
+		[self updateLabel:equationLabel2];
 	}
 }
 
