@@ -73,27 +73,27 @@
 {
 	if ([sender isEqual:sliderA]) {
 		lastA = a;
-		a = (int)(sliderA.value * 10.0) / 10.0;
+		a = sliderA.value;
 		[self updateLabel:equationLabel];
 	} else if ([sender isEqual:sliderB]) {
 		lastB = b;
-		b = (int)(sliderB.value * 10.0) / 10.0;
+		b = sliderB.value;
 		[self updateLabel:equationLabel];
 	} else if ([sender isEqual:sliderC]) {
 		lastC = c;
-		c = (int)(sliderC.value * 10.0) / 10.0;
+		c = sliderC.value;
 		[self updateLabel:equationLabel];
 	} else if ([sender isEqual:sliderA2]) {
 		lastA2 = a2;
-		a2 = (int)(sliderA2.value * 10.0) / 10.0;
+		a2 = sliderA2.value;
 		[self updateLabel:equationLabel2];
 	} else if ([sender isEqual:sliderB2]) {
 		lastB2 = b2;
-		b2 = (int)(sliderB2.value * 10.0) / 10.0;
+		b2 = sliderB2.value;
 		[self updateLabel:equationLabel2];
 	} else if ([sender isEqual:sliderC2]) {
 		lastC2 = c2;
-		c2 = (int)(sliderC2.value * 10.0) / 10.0;
+		c2 = sliderC2.value;
 		[self updateLabel:equationLabel2];
 	}
 }
@@ -171,7 +171,7 @@
 	CGContextStrokePath(context);
 	
 	// plot general setting
-	int xInterval = 1;
+	int xInterval = 2;
 	
 	// plot 1
 	CGColorRef plotColor = [[UIColor colorWithHue:0.3 saturation:1.0 brightness:1.0 alpha:0.9] CGColor];
