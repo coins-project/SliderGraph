@@ -170,16 +170,19 @@
 	}
 	CGContextStrokePath(context);
 	
+	// plot general setting
+	int xInterval = 1;
+	
 	// plot 1
 	CGColorRef plotColor = [[UIColor colorWithHue:0.3 saturation:1.0 brightness:1.0 alpha:0.9] CGColor];
 	CGContextSetLineWidth(context, 4.0);
 	switch (formControl.selectedSegmentIndex) {
 		case 0: // general form
 			CGContextMoveToPoint(context, 0, -((a * pow(-10, 2) + b * (-10) + c) / valuePerPixel) + graphView.frame.size.height / 2.0);
-			for (int j = 1; j <= graphView.frame.size.width; j += 2) {
+			for (int j = 1; j <= graphView.frame.size.width; j += xInterval) {
 				double x = (double)j / graphView.frame.size.width * 20.0 - 10;
 				double y = a * pow(x, 2) + b * (x) + c;
-				int i = -(y / valuePerPixel) + graphView.frame.size.height / 2.0;
+				double i = -(y / valuePerPixel) + graphView.frame.size.height / 2.0;
 				CGContextAddLineToPoint(context, j, i);
 			}
 			CGContextSetStrokeColorWithColor(context, plotColor);
@@ -187,10 +190,10 @@
 			break;
 		case 1: // standard form
 			CGContextMoveToPoint(context, 0, -((a * pow((-10 + b), 2) + c) / valuePerPixel) + graphView.frame.size.height / 2.0);
-			for (int j = 1; j <= graphView.frame.size.width; j += 2) {
+			for (int j = 1; j <= graphView.frame.size.width; j += xInterval) {
 				double x = (double)j / graphView.frame.size.width * 20.0 - 10;
 				double y = a * pow((x + b), 2) + c;
-				int i = -(y / valuePerPixel) + graphView.frame.size.height / 2.0;
+				double i = -(y / valuePerPixel) + graphView.frame.size.height / 2.0;
 				CGContextAddLineToPoint(context, j, i);
 			}
 			CGContextSetStrokeColorWithColor(context, plotColor);
@@ -211,10 +214,10 @@
 		case 0: // general form
 		{
 			CGContextMoveToPoint(context, 0, -((a2 * pow(-10, 2) + b2 * (-10) + c2) / valuePerPixel) + graphView.frame.size.height / 2.0);
-			for (int j = 1; j <= graphView.frame.size.width; j += 2) {
+			for (int j = 1; j <= graphView.frame.size.width; j += xInterval) {
 				double x = (double)j / graphView.frame.size.width * 20.0 - 10;
 				double y = a2 * pow(x, 2) + b2 * (x) + c2;
-				int i = -(y / valuePerPixel) + graphView.frame.size.height / 2.0;
+				double i = -(y / valuePerPixel) + graphView.frame.size.height / 2.0;
 				CGContextAddLineToPoint(context, j, i);
 			}
 			CGContextSetStrokeColorWithColor(context, plotColor2);
@@ -224,10 +227,10 @@
 		case 1:
 		{ // standard form
 			CGContextMoveToPoint(context, 0, -((a2 * pow((-10 + b2), 2) + c2) / valuePerPixel) + graphView.frame.size.height / 2.0);
-			for (int j = 1; j <= graphView.frame.size.width; j += 2) {
+			for (int j = 1; j <= graphView.frame.size.width; j += xInterval) {
 				double x = (double)j / graphView.frame.size.width * 20.0 - 10;
 				double y = a2 * pow((x + b2), 2) + c2;
-				int i = -(y / valuePerPixel) + graphView.frame.size.height / 2.0;
+				double i = -(y / valuePerPixel) + graphView.frame.size.height / 2.0;
 				CGContextAddLineToPoint(context, j, i);
 			}
 			CGContextSetStrokeColorWithColor(context, plotColor2);
