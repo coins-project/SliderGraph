@@ -17,6 +17,7 @@
 }
 
 @synthesize graphView;
+@synthesize displaySwitch;
 @synthesize equationLabel, equationLabel2;
 @synthesize sliderA, sliderB, sliderC, sliderA2, sliderB2, sliderC2;
 @synthesize formControl, formControl2;
@@ -25,6 +26,8 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+	
+	displaySwitch.transform = CGAffineTransformMakeRotation(-M_PI_2);
 	
 	sliderA.minimumValue = sliderA2.minimumValue = -10.0;
 	sliderA.maximumValue = sliderA2.maximumValue = 10.0;
@@ -102,15 +105,15 @@
 {
 	if ([label isEqual:equationLabel]) {
 		if (formControl.selectedSegmentIndex == 0) {
-			equationLabel.text = [NSString stringWithFormat:@"y = %+2.1fx^2 %+2.1fx %+2.1f", a, b, c];
+			equationLabel.text = [NSString stringWithFormat:@"y = %+2.2fx^2 %+2.2fx %+2.2f", a, b, c];
 		} else {
-			equationLabel.text = [NSString stringWithFormat:@"y = %+2.1f(x %+2.1f)^2 %+2.1f", a, b, c];
+			equationLabel.text = [NSString stringWithFormat:@"y = %+2.2f(x %+2.2f)^2 %+2.2f", a, b, c];
 		}
 	} else if ([label isEqual:equationLabel2]) {
 		if (formControl2.selectedSegmentIndex == 0) {
-			equationLabel2.text = [NSString stringWithFormat:@"y = %+2.1fx^2 %+2.1fx %+2.1f", a2, b2, c2];
+			equationLabel2.text = [NSString stringWithFormat:@"y = %+2.2fx^2 %+2.2fx %+2.2f", a2, b2, c2];
 		} else {
-			equationLabel2.text = [NSString stringWithFormat:@"y = %+2.1f(x %+2.1f)^2 %+2.1f", a2, b2, c2];
+			equationLabel2.text = [NSString stringWithFormat:@"y = %+2.2f(x %+2.2f)^2 %+2.2f", a2, b2, c2];
 		}
 	} else if ([label isKindOfClass:[UISegmentedControl class]]) {
 		[self updateLabel:equationLabel];
