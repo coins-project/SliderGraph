@@ -289,7 +289,7 @@
 	}
 	
 
-	CGContextSetLineWidth(context, 4.0);
+	CGContextSetLineWidth(context, 1.0);
 	switch (formControl.selectedSegmentIndex) {
 		case 0: // general form
 			CGContextMoveToPoint(context, 0, -((a * pow(-10, 2) + b * (-10) + c) / valuePerPixel) + mainGraphView.frame.size.height / 2.0);
@@ -433,26 +433,32 @@
 		A = a;
 		a = [textField.text doubleValue];
 		slider1.value = a;
+		[self updateEquation:slider1];
 	} else if ([textField isEqual:fieldB]) {
 		B = b;
 		b = [textField.text doubleValue];
 		slider2.value = b;
+		[self updateEquation:slider2];
 	} else if ([textField isEqual:fieldC]) {
 		C = c;
 		c = [textField.text doubleValue];
 		slider3.value = c;
+		[self updateEquation:slider3];
 	} else if ([textField isEqual:fieldK]) {
 		K = k;
 		k = [textField.text doubleValue];
 		slider1.value = k;
+		[self updateEquation:slider1];
 	} else if ([textField isEqual:fieldP]) {
 		P = p;
 		p = [textField.text doubleValue];
 		slider2.value = p;
+		[self updateEquation:slider2];
 	} else if ([textField isEqual:fieldQ]) {
 		Q = q;
 		q = [textField.text doubleValue];
 		slider3.value = q;
+		[self updateEquation:slider3];
 	}
 	[self drawMainGraph];
 	return YES;
