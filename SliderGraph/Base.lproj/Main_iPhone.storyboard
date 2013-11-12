@@ -157,13 +157,13 @@
                         <outlet property="equationLabel2" destination="FrG-U9-f88" id="sWa-W8-QFx"/>
                         <outlet property="formControl" destination="1gi-6P-lTn" id="vfN-yR-PIf"/>
                         <outlet property="formControl2" destination="Il0-g9-4Ol" id="j3Y-cV-vPF"/>
-                        <outlet property="graphView" destination="jeI-lA-CUk" id="2Sg-Zn-QjQ"/>
-                        <outlet property="sliderA" destination="oLh-sA-I3W" id="hNX-Gg-XZk"/>
+                        <outlet property="slider1" destination="oLh-sA-I3W" id="WzZ-iO-V50"/>
+                        <outlet property="slider2" destination="Pf0-aQ-mTS" id="w7U-JH-qhX"/>
+                        <outlet property="slider3" destination="kXk-fh-WeW" id="ZGK-3B-SaB"/>
                         <outlet property="sliderA2" destination="3qg-XA-9ar" id="zt0-38-ndd"/>
-                        <outlet property="sliderB" destination="Pf0-aQ-mTS" id="u9T-IV-oVx"/>
                         <outlet property="sliderB2" destination="etd-lH-HzV" id="tOX-Zv-iRM"/>
-                        <outlet property="sliderC" destination="kXk-fh-WeW" id="cZ6-rj-UiE"/>
                         <outlet property="sliderC2" destination="QVl-VY-o7b" id="jDO-Yq-z1T"/>
+                        <outlet property="subGraphView" destination="jeI-lA-CUk" id="CGJ-HB-7Uw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>

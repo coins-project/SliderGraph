@@ -8,27 +8,39 @@
 
 #import <UIKit/UIKit.h>
 
-@interface USKViewController : UIViewController
+@interface USKViewController : UIViewController <UITextFieldDelegate>
 
-@property (weak, nonatomic) IBOutlet UIImageView *graphView;
+@property (weak, nonatomic) IBOutlet UIImageView *mainGraphView; // display editing graph
+@property (weak, nonatomic) IBOutlet UIImageView *subGraphView; // display the others graph, axis and grid.
 
+@property (weak, nonatomic) IBOutlet UIView *controlView;
 
-
-@property (weak, nonatomic) IBOutlet UISwitch *displaySwitch;
+@property (weak, nonatomic) IBOutlet UISwitch *displaySwitch; // display or hide
 
 @property (weak, nonatomic) IBOutlet UILabel *equationLabel;
-@property (weak, nonatomic) IBOutlet UISlider *sliderA;
-@property (weak, nonatomic) IBOutlet UISlider *sliderB;
-@property (weak, nonatomic) IBOutlet UISlider *sliderC;
+@property (weak, nonatomic) IBOutlet UIView *generalFormView;
+@property (weak, nonatomic) IBOutlet UITextField *fieldA;
+@property (weak, nonatomic) IBOutlet UITextField *fieldB;
+@property (weak, nonatomic) IBOutlet UITextField *fieldC;
+@property (weak, nonatomic) IBOutlet UIView *standardFormView;
+@property (weak, nonatomic) IBOutlet UITextField *fieldK;
+@property (weak, nonatomic) IBOutlet UITextField *fieldP;
+@property (weak, nonatomic) IBOutlet UITextField *fieldQ;
+
+@property (weak, nonatomic) IBOutlet UISlider *slider1;
+@property (weak, nonatomic) IBOutlet UISlider *slider2;
+@property (weak, nonatomic) IBOutlet UISlider *slider3;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *formControl;
 
 
-@property (weak, nonatomic) IBOutlet UILabel *equationLabel2;
-@property (weak, nonatomic) IBOutlet UISlider *sliderA2;
-@property (weak, nonatomic) IBOutlet UISlider *sliderB2;
-@property (weak, nonatomic) IBOutlet UISlider *sliderC2;
-@property (weak, nonatomic) IBOutlet UISegmentedControl *formControl2;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *graphControl;
 
-
+- (IBAction)changeDisplay:(id)sender;
 
 @end
+
+
+/* 拡大縮小ができるようにする
+・xRange, yRangeの導入
+
+*/
