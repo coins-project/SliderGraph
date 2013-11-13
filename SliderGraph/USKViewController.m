@@ -35,7 +35,6 @@
 @synthesize mainGraphView, subGraphView;
 @synthesize controlView;
 @synthesize displaySwitch;
-@synthesize equationLabel;
 @synthesize generalFormView, standardFormView;
 @synthesize fieldA, fieldB, fieldC, fieldK, fieldP, fieldQ;
 @synthesize slider1, slider2, slider3;
@@ -289,7 +288,7 @@
 	}
 	
 
-	CGContextSetLineWidth(context, 1.0);
+	CGContextSetLineWidth(context, 4.0);
 	switch (formControl.selectedSegmentIndex) {
 		case 0: // general form
 			CGContextMoveToPoint(context, 0, -((a * pow(-10, 2) + b * (-10) + c) / valuePerPixel) + mainGraphView.frame.size.height / 2.0);
@@ -367,8 +366,8 @@
 		}
 		CGColorRef plotColor = [[UIColor colorWithHue:(double)i / NUMBER_OF_GRAPHS saturation:1.0 brightness:1.0 alpha:1.0] CGColor];
 		CGContextSetLineWidth(context, 4.0);
-		switch (formControl.selectedSegmentIndex) {
-			case 0: // general form
+		switch ((int)(parameters[i][FORM])) {
+			case GENERAL_FORM: // general form
 				tempA = parameters[i][PARAM_A];
 				tempB = parameters[i][PARAM_B];
 				tempC = parameters[i][PARAM_C];
@@ -382,7 +381,7 @@
 				CGContextSetStrokeColorWithColor(context, plotColor);
 				CGContextStrokePath(context);
 				break;
-			case 1: // standard form
+			case STANDARD_FORM: // standard form
 				tempK = parameters[i][PARAM_K];
 				tempP = parameters[i][PARAM_P];
 				tempQ = parameters[i][PARAM_Q];

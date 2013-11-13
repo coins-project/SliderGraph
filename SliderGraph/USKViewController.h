@@ -17,7 +17,6 @@
 
 @property (weak, nonatomic) IBOutlet UISwitch *displaySwitch; // display or hide
 
-@property (weak, nonatomic) IBOutlet UILabel *equationLabel;
 @property (weak, nonatomic) IBOutlet UIView *generalFormView;
 @property (weak, nonatomic) IBOutlet UITextField *fieldA;
 @property (weak, nonatomic) IBOutlet UITextField *fieldB;
@@ -40,7 +39,11 @@
 @end
 
 
-/* 拡大縮小ができるようにする
+/* 
+ 拡大縮小ができるようにする
 ・xRange, yRangeの導入
+・textFieldのframe移動をconstraint baseにする
+ ・ドラッグ値域、変域
+ ・
 
 */
