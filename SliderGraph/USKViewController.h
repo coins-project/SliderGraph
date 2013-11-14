@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "COINSKeyboard.h"
 
 @interface USKViewController : UIViewController <UITextFieldDelegate>
 
@@ -15,6 +16,7 @@
 
 @property (weak, nonatomic) IBOutlet UIView *controlView;
 
+@property (weak, nonatomic) IBOutlet COINSKeyboard *keyboardView;
 @property (weak, nonatomic) IBOutlet UISwitch *displaySwitch; // display or hide
 
 @property (weak, nonatomic) IBOutlet UIView *generalFormView;

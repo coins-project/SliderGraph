@@ -22,6 +22,7 @@
 		431A3023182B506C00AC4E8D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 431A3002182B506B00AC4E8D /* UIKit.framework */; };
 		431A302B182B506C00AC4E8D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 431A3029182B506C00AC4E8D /* InfoPlist.strings */; };
 		431A302D182B506C00AC4E8D /* SliderGraphTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 431A302C182B506C00AC4E8D /* SliderGraphTests.m */; };
+		4372FC7A18346585002816B1 /* COINSKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 4372FC7918346585002816B1 /* COINSKeyboard.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,8 @@
 		431A3028182B506C00AC4E8D /* SliderGraphTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SliderGraphTests-Info.plist"; sourceTree = "<group>"; };
 		431A302A182B506C00AC4E8D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		431A302C182B506C00AC4E8D /* SliderGraphTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SliderGraphTests.m; sourceTree = "<group>"; };
+		4372FC7818346585002816B1 /* COINSKeyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COINSKeyboard.h; sourceTree = "<group>"; };
+		4372FC7918346585002816B1 /* COINSKeyboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = COINSKeyboard.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +87,7 @@
 		431A2FF2182B506B00AC4E8D = {
 			isa = PBXGroup;
 			children = (
+				4372FC7718346545002816B1 /* View */,
 				431A3004182B506B00AC4E8D /* SliderGraph */,
 				431A3026182B506C00AC4E8D /* SliderGraphTests */,
 				431A2FFD182B506B00AC4E8D /* Frameworks */,
@@ -153,6 +157,15 @@
 				431A3029182B506C00AC4E8D /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		4372FC7718346545002816B1 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				4372FC7818346585002816B1 /* COINSKeyboard.h */,
+				4372FC7918346585002816B1 /* COINSKeyboard.m */,
+			);
+			name = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -260,6 +273,7 @@
 				431A3018182B506B00AC4E8D /* USKViewController.m in Sources */,
 				431A300F182B506B00AC4E8D /* USKAppDelegate.m in Sources */,
 				431A300B182B506B00AC4E8D /* main.m in Sources */,
+				4372FC7A18346585002816B1 /* COINSKeyboard.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

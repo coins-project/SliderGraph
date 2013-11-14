@@ -221,6 +221,11 @@
                                             <constraint firstAttribute="width" constant="324" id="QZd-B0-SfM"/>
                                         </constraints>
                                     </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CYR-vt-BSZ" customClass="COINSKeyboard">
+                                        <rect key="frame" x="0.0" y="83" width="768" height="207"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -231,15 +236,19 @@
                                     <constraint firstItem="ydr-rk-QPf" firstAttribute="top" secondItem="Rcn-I4-pcW" secondAttribute="bottom" constant="8" symbolic="YES" id="9jT-C1-2T7"/>
                                     <constraint firstAttribute="bottom" secondItem="akE-7x-Vvc" secondAttribute="bottom" constant="20" symbolic="YES" id="Gqx-Eh-Phh"/>
                                     <constraint firstItem="cXi-wk-l48" firstAttribute="leading" secondItem="tje-LD-Oig" secondAttribute="leading" constant="20" symbolic="YES" id="I9k-1e-3W2"/>
+                                    <constraint firstAttribute="trailing" secondItem="CYR-vt-BSZ" secondAttribute="trailing" id="Ip3-N8-bsY"/>
                                     <constraint firstItem="Rcn-I4-pcW" firstAttribute="top" secondItem="dWU-Z3-A5J" secondAttribute="bottom" constant="8" symbolic="YES" id="J1r-3D-vpj"/>
                                     <constraint firstItem="Rcn-I4-pcW" firstAttribute="top" secondItem="ToR-Zl-cQM" secondAttribute="bottom" constant="8" symbolic="YES" id="LcV-S1-A7Z"/>
                                     <constraint firstItem="akE-7x-Vvc" firstAttribute="top" secondItem="UVP-f8-s6f" secondAttribute="bottom" constant="8" symbolic="YES" id="Nfd-BL-Ddz"/>
                                     <constraint firstItem="UVP-f8-s6f" firstAttribute="top" secondItem="cXi-wk-l48" secondAttribute="bottom" constant="8" symbolic="YES" id="TVJ-hZ-OWK"/>
                                     <constraint firstAttribute="trailing" secondItem="dWU-Z3-A5J" secondAttribute="trailing" constant="20" id="YDb-8x-zze"/>
                                     <constraint firstAttribute="centerX" secondItem="6Kt-1Y-g1G" secondAttribute="centerX" id="bOe-lk-YL4"/>
+                                    <constraint firstAttribute="bottom" secondItem="CYR-vt-BSZ" secondAttribute="bottom" id="bPv-zV-kYx"/>
                                     <constraint firstAttribute="trailing" secondItem="akE-7x-Vvc" secondAttribute="trailing" constant="20" symbolic="YES" id="bXK-Ls-vOp"/>
                                     <constraint firstAttribute="trailing" secondItem="ydr-rk-QPf" secondAttribute="trailing" constant="20" symbolic="YES" id="dgM-nD-BMV"/>
+                                    <constraint firstItem="CYR-vt-BSZ" firstAttribute="leading" secondItem="tje-LD-Oig" secondAttribute="leading" id="euC-e2-GZD"/>
                                     <constraint firstItem="cXi-wk-l48" firstAttribute="top" secondItem="ydr-rk-QPf" secondAttribute="bottom" constant="8" symbolic="YES" id="jOw-A5-JvW"/>
+                                    <constraint firstItem="CYR-vt-BSZ" firstAttribute="top" secondItem="6Kt-1Y-g1G" secondAttribute="bottom" constant="20" id="m9S-sI-GmE"/>
                                     <constraint firstItem="Rcn-I4-pcW" firstAttribute="leading" secondItem="tje-LD-Oig" secondAttribute="leading" constant="20" symbolic="YES" id="mJz-Yk-2hf"/>
                                     <constraint firstItem="Rcn-I4-pcW" firstAttribute="top" secondItem="6Kt-1Y-g1G" secondAttribute="bottom" constant="20" id="mrw-VV-O7T"/>
                                     <constraint firstItem="ToR-Zl-cQM" firstAttribute="leading" secondItem="tje-LD-Oig" secondAttribute="leading" constant="20" symbolic="YES" id="pNg-Dc-ZV5"/>
@@ -276,6 +285,7 @@
                         <outlet property="formControl" destination="Rcn-I4-pcW" id="amj-j1-kPM"/>
                         <outlet property="generalFormView" destination="ToR-Zl-cQM" id="GyH-Ab-A8g"/>
                         <outlet property="graphControl" destination="akE-7x-Vvc" id="dKm-TC-XsX"/>
+                        <outlet property="keyboardView" destination="CYR-vt-BSZ" id="63n-J0-9N5"/>
                         <outlet property="mainGraphView" destination="K2v-5f-i7K" id="IJK-DG-BAj"/>
                         <outlet property="slider1" destination="ydr-rk-QPf" id="SQZ-DB-Cmn"/>
                         <outlet property="slider2" destination="cXi-wk-l48" id="k2Q-OA-s8X"/>

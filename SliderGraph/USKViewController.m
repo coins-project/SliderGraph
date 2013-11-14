@@ -34,6 +34,7 @@
 
 @synthesize mainGraphView, subGraphView;
 @synthesize controlView;
+@synthesize keyboardView;
 @synthesize displaySwitch;
 @synthesize generalFormView, standardFormView;
 @synthesize fieldA, fieldB, fieldC, fieldK, fieldP, fieldQ;
@@ -73,6 +74,13 @@
 	for (int i = 1; i < NUMBER_OF_GRAPHS; i++) {
 		parameters[i][DISPLAY] = NO;
 	}
+	
+	// prepare keyboard
+	NSArray *keyTopTitles = @[@"0", @"1", @"2", @"3", @"4", @".", @"x", @"5", @"6", @"7", @"8", @"9", @"OK", @"OK"];
+	NSArray *mergeInfo = @[@[@12,@13]];
+	[keyboardView updateButtonsWithRow:2 column:7 titles:keyTopTitles outCharacters:@"01234.x56789kk" mergeInfo:mergeInfo style:COINSKeyboardStyleiOS7];
+	keyboardView.hidden = YES; // DEBUG
+	
 	
 	NSTimer *timer = [NSTimer timerWithTimeInterval:0.03
 											 target:self
@@ -409,6 +417,7 @@
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
+	[keyboardView updateButtonsWithRow:keyboardView.row column:keyboardView.column titles:keyboardView.titles outCharacters:keyboardView.outCharacters mergeInfo:keyboardView.mergeInfo style:keyboardView.style];
 	[self drawSubGraph];
 	[self drawMainGraph];
 }
@@ -468,4 +477,5 @@
 	display = aSwitch.on;
 	[self drawMainGraph];
 }
+
 @end
