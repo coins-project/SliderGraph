@@ -28,18 +28,6 @@
                                 <rect key="frame" x="0.0" y="734" width="768" height="290"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Rcn-I4-pcW">
-                                        <rect key="frame" x="20" y="83" width="728" height="29"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="28" id="QrQ-Ck-v7n"/>
-                                        </constraints>
-                                        <segments>
-                                            <segment title="General Form"/>
-                                            <segment title="Standard Form"/>
-                                        </segments>
-                                        <color key="tintColor" red="0.10222829133272171" green="0.77806884050369263" blue="0.015046648681163788" alpha="1" colorSpace="calibratedRGB"/>
-                                    </segmentedControl>
                                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="UVP-f8-s6f">
                                         <rect key="frame" x="18" y="201" width="732" height="34"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -61,8 +49,8 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="tintColor" red="0.10222829133272171" green="0.77806884050369263" blue="0.015046648681163788" alpha="1" colorSpace="calibratedRGB"/>
                                     </slider>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dWU-Z3-A5J">
-                                        <rect key="frame" x="424" y="3" width="324" height="72"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dWU-Z3-A5J" userLabel="StandardFormView">
+                                        <rect key="frame" x="222" y="39" width="324" height="72"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="y =" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="Lg6-X3-M9o">
@@ -126,8 +114,8 @@
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="72" id="Tsl-bA-wst"/>
-                                            <constraint firstAttribute="width" constant="324" id="Z71-b5-Msj"/>
+                                            <constraint firstAttribute="width" constant="324" id="kvh-UC-HYt"/>
+                                            <constraint firstAttribute="height" constant="72" id="yI8-rp-jO6"/>
                                         </constraints>
                                     </view>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="akE-7x-Vvc">
@@ -145,15 +133,8 @@
                                         </segments>
                                         <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                     </segmentedControl>
-                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6Kt-1Y-g1G">
-                                        <rect key="frame" x="360" y="32" width="51" height="31"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <connections>
-                                            <action selector="changeDisplay:" destination="BYZ-38-t0r" eventType="valueChanged" id="sQg-kx-3vt"/>
-                                        </connections>
-                                    </switch>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ToR-Zl-cQM">
-                                        <rect key="frame" x="20" y="3" width="324" height="72"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ToR-Zl-cQM" userLabel="GeneralFormView">
+                                        <rect key="frame" x="222" y="39" width="324" height="72"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="y =" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="bYv-Hd-jWC">
@@ -217,41 +198,49 @@
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="72" id="GgS-xV-bQh"/>
-                                            <constraint firstAttribute="width" constant="324" id="QZd-B0-SfM"/>
+                                            <constraint firstAttribute="width" constant="324" id="JBL-mN-Kge"/>
+                                            <constraint firstAttribute="height" constant="72" id="rv8-oq-igX"/>
                                         </constraints>
                                     </view>
-                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CYR-vt-BSZ" customClass="COINSKeyboard">
-                                        <rect key="frame" x="0.0" y="83" width="768" height="207"/>
+                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6Kt-1Y-g1G">
+                                        <rect key="frame" x="699" y="20" width="51" height="31"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                    </view>
+                                        <connections>
+                                            <action selector="changeDisplay:" destination="BYZ-38-t0r" eventType="valueChanged" id="sQg-kx-3vt"/>
+                                        </connections>
+                                    </switch>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="表示" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xng-vk-NOr">
+                                        <rect key="frame" x="625" y="25" width="34" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="5pE-J8-cLZ">
+                                        <rect key="frame" x="625" y="83" width="123" height="29"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <segments>
+                                            <segment title="一般形"/>
+                                            <segment title="標準形"/>
+                                        </segments>
+                                    </segmentedControl>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="290" id="0kR-gg-lbq"/>
                                     <constraint firstAttribute="trailing" secondItem="UVP-f8-s6f" secondAttribute="trailing" constant="20" symbolic="YES" id="59G-RS-ahM"/>
                                     <constraint firstItem="akE-7x-Vvc" firstAttribute="leading" secondItem="tje-LD-Oig" secondAttribute="leading" constant="20" symbolic="YES" id="5Fj-Ep-hDm"/>
-                                    <constraint firstAttribute="trailing" secondItem="Rcn-I4-pcW" secondAttribute="trailing" constant="20" symbolic="YES" id="6G1-nL-WGM"/>
-                                    <constraint firstItem="ydr-rk-QPf" firstAttribute="top" secondItem="Rcn-I4-pcW" secondAttribute="bottom" constant="8" symbolic="YES" id="9jT-C1-2T7"/>
                                     <constraint firstAttribute="bottom" secondItem="akE-7x-Vvc" secondAttribute="bottom" constant="20" symbolic="YES" id="Gqx-Eh-Phh"/>
                                     <constraint firstItem="cXi-wk-l48" firstAttribute="leading" secondItem="tje-LD-Oig" secondAttribute="leading" constant="20" symbolic="YES" id="I9k-1e-3W2"/>
-                                    <constraint firstAttribute="trailing" secondItem="CYR-vt-BSZ" secondAttribute="trailing" id="Ip3-N8-bsY"/>
-                                    <constraint firstItem="Rcn-I4-pcW" firstAttribute="top" secondItem="dWU-Z3-A5J" secondAttribute="bottom" constant="8" symbolic="YES" id="J1r-3D-vpj"/>
-                                    <constraint firstItem="Rcn-I4-pcW" firstAttribute="top" secondItem="ToR-Zl-cQM" secondAttribute="bottom" constant="8" symbolic="YES" id="LcV-S1-A7Z"/>
                                     <constraint firstItem="akE-7x-Vvc" firstAttribute="top" secondItem="UVP-f8-s6f" secondAttribute="bottom" constant="8" symbolic="YES" id="Nfd-BL-Ddz"/>
+                                    <constraint firstAttribute="centerX" secondItem="dWU-Z3-A5J" secondAttribute="centerX" id="Qrf-08-3SF"/>
                                     <constraint firstItem="UVP-f8-s6f" firstAttribute="top" secondItem="cXi-wk-l48" secondAttribute="bottom" constant="8" symbolic="YES" id="TVJ-hZ-OWK"/>
-                                    <constraint firstAttribute="trailing" secondItem="dWU-Z3-A5J" secondAttribute="trailing" constant="20" id="YDb-8x-zze"/>
-                                    <constraint firstAttribute="centerX" secondItem="6Kt-1Y-g1G" secondAttribute="centerX" id="bOe-lk-YL4"/>
-                                    <constraint firstAttribute="bottom" secondItem="CYR-vt-BSZ" secondAttribute="bottom" id="bPv-zV-kYx"/>
+                                    <constraint firstItem="ydr-rk-QPf" firstAttribute="top" secondItem="dWU-Z3-A5J" secondAttribute="bottom" constant="8" symbolic="YES" id="UJa-S9-naG"/>
                                     <constraint firstAttribute="trailing" secondItem="akE-7x-Vvc" secondAttribute="trailing" constant="20" symbolic="YES" id="bXK-Ls-vOp"/>
                                     <constraint firstAttribute="trailing" secondItem="ydr-rk-QPf" secondAttribute="trailing" constant="20" symbolic="YES" id="dgM-nD-BMV"/>
-                                    <constraint firstItem="CYR-vt-BSZ" firstAttribute="leading" secondItem="tje-LD-Oig" secondAttribute="leading" id="euC-e2-GZD"/>
+                                    <constraint firstAttribute="centerX" secondItem="ToR-Zl-cQM" secondAttribute="centerX" id="eHQ-TN-hEx"/>
+                                    <constraint firstItem="ydr-rk-QPf" firstAttribute="top" secondItem="ToR-Zl-cQM" secondAttribute="bottom" constant="8" symbolic="YES" id="fJs-qs-Jgy"/>
                                     <constraint firstItem="cXi-wk-l48" firstAttribute="top" secondItem="ydr-rk-QPf" secondAttribute="bottom" constant="8" symbolic="YES" id="jOw-A5-JvW"/>
-                                    <constraint firstItem="CYR-vt-BSZ" firstAttribute="top" secondItem="6Kt-1Y-g1G" secondAttribute="bottom" constant="20" id="m9S-sI-GmE"/>
-                                    <constraint firstItem="Rcn-I4-pcW" firstAttribute="leading" secondItem="tje-LD-Oig" secondAttribute="leading" constant="20" symbolic="YES" id="mJz-Yk-2hf"/>
-                                    <constraint firstItem="Rcn-I4-pcW" firstAttribute="top" secondItem="6Kt-1Y-g1G" secondAttribute="bottom" constant="20" id="mrw-VV-O7T"/>
-                                    <constraint firstItem="ToR-Zl-cQM" firstAttribute="leading" secondItem="tje-LD-Oig" secondAttribute="leading" constant="20" symbolic="YES" id="pNg-Dc-ZV5"/>
                                     <constraint firstAttribute="trailing" secondItem="cXi-wk-l48" secondAttribute="trailing" constant="20" symbolic="YES" id="ptw-Q9-GWg"/>
                                     <constraint firstItem="ydr-rk-QPf" firstAttribute="leading" secondItem="tje-LD-Oig" secondAttribute="leading" constant="20" symbolic="YES" id="y6r-4p-ask"/>
                                     <constraint firstItem="UVP-f8-s6f" firstAttribute="leading" secondItem="tje-LD-Oig" secondAttribute="leading" constant="20" symbolic="YES" id="yo0-S1-voo"/>
@@ -282,10 +271,9 @@
                         <outlet property="fieldK" destination="sRP-ij-qLL" id="wAW-Ao-oth"/>
                         <outlet property="fieldP" destination="5nd-v9-ljI" id="sdG-QK-h8n"/>
                         <outlet property="fieldQ" destination="GGj-cv-bzd" id="e1o-fY-GIo"/>
-                        <outlet property="formControl" destination="Rcn-I4-pcW" id="amj-j1-kPM"/>
+                        <outlet property="formControl" destination="5pE-J8-cLZ" id="jql-Yw-w5E"/>
                         <outlet property="generalFormView" destination="ToR-Zl-cQM" id="GyH-Ab-A8g"/>
                         <outlet property="graphControl" destination="akE-7x-Vvc" id="dKm-TC-XsX"/>
-                        <outlet property="keyboardView" destination="CYR-vt-BSZ" id="63n-J0-9N5"/>
                         <outlet property="mainGraphView" destination="K2v-5f-i7K" id="IJK-DG-BAj"/>
                         <outlet property="slider1" destination="ydr-rk-QPf" id="SQZ-DB-Cmn"/>
                         <outlet property="slider2" destination="cXi-wk-l48" id="k2Q-OA-s8X"/>

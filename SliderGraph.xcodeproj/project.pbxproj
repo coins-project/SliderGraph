@@ -217,7 +217,7 @@
 				ORGANIZATIONNAME = "Yusuke Iwama";
 				TargetAttributes = {
 					431A2FFA182B506B00AC4E8D = {
-						DevelopmentTeam = VV4XJ6D4G4;
+						DevelopmentTeam = RM3N4N4RRF;
 					};
 					431A301E182B506C00AC4E8D = {
 						TestTargetID = 431A2FFA182B506B00AC4E8D;
@@ -415,6 +415,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SliderGraph/SliderGraph-Prefix.pch";
 				INFOPLIST_FILE = "SliderGraph/SliderGraph-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
@@ -431,6 +432,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SliderGraph/SliderGraph-Prefix.pch";
 				INFOPLIST_FILE = "SliderGraph/SliderGraph-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;

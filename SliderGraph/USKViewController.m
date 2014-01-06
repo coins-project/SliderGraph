@@ -32,8 +32,6 @@
 
 }
 
-@synthesize mainGraphView, subGraphView;
-@synthesize controlView;
 @synthesize keyboardView;
 @synthesize displaySwitch;
 @synthesize generalFormView, standardFormView;
@@ -47,7 +45,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
 	
-	displaySwitch.transform = CGAffineTransformMakeRotation(-M_PI_2);
+//	displaySwitch.transform = CGAffineTransformMakeRotation(-M_PI_2);
 	
 	[graphControl addTarget:self action:@selector(switchGraphs:) forControlEvents:UIControlEventValueChanged];
 	[self switchGraphs:graphControl];
@@ -113,7 +111,7 @@
 			form = GENERAL_FORM;
 			generalFormView.alpha = 1.0;
 			generalFormView.userInteractionEnabled = YES;
-			standardFormView.alpha = 0.2;
+			standardFormView.alpha = 0.0;
 			standardFormView.userInteractionEnabled = NO;
 			slider1.value = a;
 			slider2.value = b;
@@ -121,7 +119,7 @@
 			break;
 		case 1:
 			form = STANDARD_FORM;
-			generalFormView.alpha = 0.2;
+			generalFormView.alpha = 0.0;
 			generalFormView.userInteractionEnabled = NO;
 			standardFormView.alpha = 1.0;
 			standardFormView.userInteractionEnabled = YES;
@@ -153,7 +151,7 @@
 	// set appearance
 	UIColor *tintColor = [UIColor colorWithHue:((double)currentGraphNumber / NUMBER_OF_GRAPHS) saturation:1.0 brightness:0.7 alpha:1.0];
 	[displaySwitch setOnTintColor:tintColor];
-	NSArray *subViews = [controlView subviews];
+	NSArray *subViews = [self.controlView subviews];
 	for (UIView *aSubView in subViews) {
 		if ([aSubView isEqual:graphControl]) {
 			continue;
@@ -282,10 +280,10 @@
 
 - (void)drawMainGraph
 {
-	UIGraphicsBeginImageContextWithOptions(mainGraphView.frame.size, NO, 0.0);
+	UIGraphicsBeginImageContextWithOptions(self.mainGraphView.frame.size, NO, 0.0);
 	CGContextRef context = UIGraphicsGetCurrentContext();
 	
-	double valuePerPixel = 20.0 / mainGraphView.frame.size.width;
+	double valuePerPixel = 20.0 / self.mainGraphView.frame.size.width;
 	int xInterval = 2;
 
 	CGColorRef plotColor;
@@ -299,22 +297,22 @@
 	CGContextSetLineWidth(context, 4.0);
 	switch (formControl.selectedSegmentIndex) {
 		case 0: // general form
-			CGContextMoveToPoint(context, 0, -((a * pow(-10, 2) + b * (-10) + c) / valuePerPixel) + mainGraphView.frame.size.height / 2.0);
-			for (int j = 1; j <= mainGraphView.frame.size.width; j += xInterval) {
-				double x = (double)j / mainGraphView.frame.size.width * 20.0 - 10;
+			CGContextMoveToPoint(context, 0, -((a * pow(-10, 2) + b * (-10) + c) / valuePerPixel) + self.mainGraphView.frame.size.height / 2.0);
+			for (int j = 1; j <= self.mainGraphView.frame.size.width; j += xInterval) {
+				double x = (double)j / self.mainGraphView.frame.size.width * 20.0 - 10;
 				double y = a * pow(x, 2) + b * (x) + c;
-				double i = -(y / valuePerPixel) + mainGraphView.frame.size.height / 2.0;
+				double i = -(y / valuePerPixel) + self.mainGraphView.frame.size.height / 2.0;
 				CGContextAddLineToPoint(context, j, i);
 			}
 			CGContextSetStrokeColorWithColor(context, plotColor);
 			CGContextStrokePath(context);
 			break;
 		case 1: // standard form
-			CGContextMoveToPoint(context, 0, -((k * pow((-10 + p), 2) + q) / valuePerPixel) + mainGraphView.frame.size.height / 2.0);
-			for (int j = 1; j <= mainGraphView.frame.size.width; j += xInterval) {
-				double x = (double)j / mainGraphView.frame.size.width * 20.0 - 10;
+			CGContextMoveToPoint(context, 0, -((k * pow((-10 + p), 2) + q) / valuePerPixel) + self.mainGraphView.frame.size.height / 2.0);
+			for (int j = 1; j <= self.mainGraphView.frame.size.width; j += xInterval) {
+				double x = (double)j / self.mainGraphView.frame.size.width * 20.0 - 10;
 				double y = k * pow((x + p), 2) + q;
-				double i = -(y / valuePerPixel) + mainGraphView.frame.size.height / 2.0;
+				double i = -(y / valuePerPixel) + self.mainGraphView.frame.size.height / 2.0;
 				CGContextAddLineToPoint(context, j, i);
 			}
 			CGContextSetStrokeColorWithColor(context, plotColor);
@@ -326,39 +324,39 @@
 	CGContextSetStrokeColorWithColor(context, plotColor);
 	CGContextStrokePath(context);
 	
-	mainGraphView.image = UIGraphicsGetImageFromCurrentImageContext();
+	self.mainGraphView.image = UIGraphicsGetImageFromCurrentImageContext();
 	UIGraphicsEndImageContext();
 }
 
 - (void)drawSubGraph
 {
-	UIGraphicsBeginImageContextWithOptions(subGraphView.frame.size, YES, 0.0);
+	UIGraphicsBeginImageContextWithOptions(self.subGraphView.frame.size, YES, 0.0);
 	CGContextRef context = UIGraphicsGetCurrentContext();
 	
 	// axis
 	CGColorRef axisColor = [[UIColor whiteColor] CGColor];
 	CGContextSetLineWidth(context, 2.0);
 	CGContextSetStrokeColorWithColor(context, axisColor);
-	CGContextMoveToPoint(context, 0.0, subGraphView.frame.size.height / 2.0);
-	CGContextAddLineToPoint(context, subGraphView.frame.size.width, subGraphView.frame.size.height / 2.0);
-	CGContextMoveToPoint(context, subGraphView.frame.size.width / 2.0, 0.0);
-	CGContextAddLineToPoint(context, subGraphView.frame.size.width / 2.0, subGraphView.frame.size.height);
+	CGContextMoveToPoint(context, 0.0, self.subGraphView.frame.size.height / 2.0);
+	CGContextAddLineToPoint(context, self.subGraphView.frame.size.width, self.subGraphView.frame.size.height / 2.0);
+	CGContextMoveToPoint(context, self.subGraphView.frame.size.width / 2.0, 0.0);
+	CGContextAddLineToPoint(context, self.subGraphView.frame.size.width / 2.0, self.subGraphView.frame.size.height);
 	CGContextStrokePath(context);
 	
-	double valuePerPixel = 20.0 / subGraphView.frame.size.width;
+	double valuePerPixel = 20.0 / self.subGraphView.frame.size.width;
 	
 	// grid
 	CGContextSetLineWidth(context, 0.5);
 	CGContextSetStrokeColorWithColor(context, axisColor);
 	for (int x = -20; x < 20; x++) {
-		int j = x / valuePerPixel + subGraphView.frame.size.width / 2.0;
+		int j = x / valuePerPixel + self.subGraphView.frame.size.width / 2.0;
 		CGContextMoveToPoint(context, j, 0);
-		CGContextAddLineToPoint(context, j, subGraphView.frame.size.height);
+		CGContextAddLineToPoint(context, j, self.subGraphView.frame.size.height);
 	}
 	for (int y = -20; y < 20; y++) {
-		int i = y / valuePerPixel + subGraphView.frame.size.height / 2.0;
+		int i = y / valuePerPixel + self.subGraphView.frame.size.height / 2.0;
 		CGContextMoveToPoint(context, 0, i);
-		CGContextAddLineToPoint(context, subGraphView.frame.size.width, i);
+		CGContextAddLineToPoint(context, self.subGraphView.frame.size.width, i);
 	}
 	CGContextStrokePath(context);
 	
@@ -379,11 +377,11 @@
 				tempA = parameters[i][PARAM_A];
 				tempB = parameters[i][PARAM_B];
 				tempC = parameters[i][PARAM_C];
-				CGContextMoveToPoint(context, 0, -((tempA * pow(-10, 2) + tempB * (-10) + tempC) / valuePerPixel) + mainGraphView.frame.size.height / 2.0);
-				for (int j = 1; j <= mainGraphView.frame.size.width; j += xInterval) {
-					double x = (double)j / mainGraphView.frame.size.width * 20.0 - 10;
+				CGContextMoveToPoint(context, 0, -((tempA * pow(-10, 2) + tempB * (-10) + tempC) / valuePerPixel) + self.mainGraphView.frame.size.height / 2.0);
+				for (int j = 1; j <= self.mainGraphView.frame.size.width; j += xInterval) {
+					double x = (double)j / self.mainGraphView.frame.size.width * 20.0 - 10;
 					double y = tempA * pow(x, 2) + tempB * (x) + tempC;
-					double i = -(y / valuePerPixel) + mainGraphView.frame.size.height / 2.0;
+					double i = -(y / valuePerPixel) + self.mainGraphView.frame.size.height / 2.0;
 					CGContextAddLineToPoint(context, j, i);
 				}
 				CGContextSetStrokeColorWithColor(context, plotColor);
@@ -393,11 +391,11 @@
 				tempK = parameters[i][PARAM_K];
 				tempP = parameters[i][PARAM_P];
 				tempQ = parameters[i][PARAM_Q];
-				CGContextMoveToPoint(context, 0, -((tempK * pow((-10 + tempP), 2) + tempQ) / valuePerPixel) + mainGraphView.frame.size.height / 2.0);
-				for (int j = 1; j <= mainGraphView.frame.size.width; j += xInterval) {
-					double x = (double)j / mainGraphView.frame.size.width * 20.0 - 10;
+				CGContextMoveToPoint(context, 0, -((tempK * pow((-10 + tempP), 2) + tempQ) / valuePerPixel) + self.mainGraphView.frame.size.height / 2.0);
+				for (int j = 1; j <= self.mainGraphView.frame.size.width; j += xInterval) {
+					double x = (double)j / self.mainGraphView.frame.size.width * 20.0 - 10;
 					double y = tempK * pow((x + tempP), 2) + tempQ;
-					double i = -(y / valuePerPixel) + mainGraphView.frame.size.height / 2.0;
+					double i = -(y / valuePerPixel) + self.mainGraphView.frame.size.height / 2.0;
 					CGContextAddLineToPoint(context, j, i);
 				}
 				CGContextSetStrokeColorWithColor(context, plotColor);
@@ -411,7 +409,7 @@
 		CGContextStrokePath(context);
 	}
 	
-	subGraphView.image = UIGraphicsGetImageFromCurrentImageContext();
+	self.subGraphView.image = UIGraphicsGetImageFromCurrentImageContext();
 	UIGraphicsEndImageContext();
 }
 
@@ -425,7 +423,7 @@
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
 	[UIView animateWithDuration:0.3 animations:^{
-		controlView.frame = CGRectMake(controlView.frame.origin.x, controlView.frame.origin.y - 200, controlView.frame.size.width, controlView.frame.size.height);
+		self.controlView.frame = CGRectMake(self.controlView.frame.origin.x, self.controlView.frame.origin.y - 200, self.controlView.frame.size.width, self.controlView.frame.size.height);
 	}];
 }
 
@@ -434,7 +432,7 @@
 	[textField resignFirstResponder];
 	
 	[UIView animateWithDuration:0.3 animations:^{
-		controlView.frame = CGRectMake(controlView.frame.origin.x, controlView.frame.origin.y + 200, controlView.frame.size.width, controlView.frame.size.height);
+		self.controlView.frame = CGRectMake(self.controlView.frame.origin.x, self.controlView.frame.origin.y + 200, self.controlView.frame.size.width, self.controlView.frame.size.height);
 	}];
 		
 	if ([textField isEqual:fieldA]) {
