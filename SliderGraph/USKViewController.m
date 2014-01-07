@@ -20,22 +20,50 @@
 #define GENERAL_FORM 0
 #define STANDARD_FORM 1
 
+@interface USKViewController ()
+
+@property (weak, nonatomic) IBOutlet UIImageView *mainGraphView; // display editing graph
+@property (weak, nonatomic) IBOutlet UIImageView *subGraphView; // display the others graph, axis and grid.
+
+@property (weak, nonatomic) IBOutlet UIView *controlView;
+
+@property (weak, nonatomic) IBOutlet COINSKeyboard *keyboardView;
+@property (weak, nonatomic) IBOutlet UISwitch *displaySwitch; // display or hide
+
+@property (weak, nonatomic) IBOutlet UIView *generalFormView;
+@property (weak, nonatomic) IBOutlet UITextField *fieldA;
+@property (weak, nonatomic) IBOutlet UITextField *fieldB;
+@property (weak, nonatomic) IBOutlet UITextField *fieldC;
+@property (weak, nonatomic) IBOutlet UIView *standardFormView;
+@property (weak, nonatomic) IBOutlet UITextField *fieldK;
+@property (weak, nonatomic) IBOutlet UITextField *fieldP;
+@property (weak, nonatomic) IBOutlet UITextField *fieldQ;
+
+@property (weak, nonatomic) IBOutlet UISlider *slider1;
+@property (weak, nonatomic) IBOutlet UISlider *slider2;
+@property (weak, nonatomic) IBOutlet UISlider *slider3;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *formControl;
+
+
+@property (weak, nonatomic) IBOutlet UISegmentedControl *graphControl;
+
+
+@end
+
 @implementation USKViewController {
-	BOOL updating;
-	BOOL showGrid;
+	BOOL _updating;
+	BOOL _showGrid;
 	
-	double a, b, c, k, p, q, A, B, C, K, P, Q; // lower case ... current parameters // upper case ... last parameters
+	double _a, _b, _c, _k, _p, _q, _A, _B, _C, _K, _P, _Q; // lower case ... current parameters // upper case ... last parameters
 	BOOL form, display;
 	
-	double parameters[NUMBER_OF_GRAPHS][8]; // 6 ... a, b, c, k, p, q, form, display,
-	NSUInteger currentGraphNumber;
-
+	double _parameters[NUMBER_OF_GRAPHS][8]; // 6 ... a, b, c, k, p, q, form, display,
+	NSUInteger _currentGraphNumber;
 }
 
 @synthesize generalFormView, standardFormView;
 @synthesize fieldA, fieldB, fieldC, fieldK, fieldP, fieldQ;
 @synthesize slider1, slider2, slider3;
-@synthesize graphControl;
 
 - (void)viewDidLoad
 {
@@ -44,8 +72,8 @@
 	
 //	self.displaySwitch.transform = CGAffineTransformMakeRotation(-M_PI_2);
 	
-	[graphControl addTarget:self action:@selector(switchGraphs:) forControlEvents:UIControlEventValueChanged];
-	[self switchGraphs:graphControl];
+	[self.graphControl addTarget:self action:@selector(switchGraphs:) forControlEvents:UIControlEventValueChanged];
+	[self switchGraphs:self.graphControl];
 	
 	slider1.minimumValue = -10.0;
 	slider1.maximumValue = 10.0;
@@ -59,15 +87,15 @@
 	[self.formControl addTarget:self action:@selector(changeForm:) forControlEvents:UIControlEventValueChanged];
 	
 	// set default value
-	a = slider1.value = 1.0;
-	b = slider2.value = 0.0;
-	c = slider3.value = 0.0;
+	_a = slider1.value = 1.0;
+	_b = slider2.value = 0.0;
+	_c = slider3.value = 0.0;
 	form = GENERAL_FORM;
 	self.displaySwitch.on = display = YES;
 	self.formControl.selectedSegmentIndex = 0;
 	[self changeForm:self.formControl];
 	for (int i = 1; i < NUMBER_OF_GRAPHS; i++) {
-		parameters[i][DISPLAY] = NO;
+		_parameters[i][DISPLAY] = NO;
 	}
 	
 	// prepare keyboard
@@ -84,7 +112,7 @@
 											repeats:YES];
 	[[NSRunLoop mainRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
 	
-	showGrid = YES;
+	_showGrid = YES;
 	
 	[self forceUpdateEquation];
 }
@@ -110,9 +138,9 @@
 			generalFormView.userInteractionEnabled = YES;
 			standardFormView.alpha = 0.0;
 			standardFormView.userInteractionEnabled = NO;
-			slider1.value = a;
-			slider2.value = b;
-			slider3.value = c;
+			slider1.value = _a;
+			slider2.value = _b;
+			slider3.value = _c;
 			break;
 		case 1:
 			form = STANDARD_FORM;
@@ -120,9 +148,9 @@
 			generalFormView.userInteractionEnabled = NO;
 			standardFormView.alpha = 1.0;
 			standardFormView.userInteractionEnabled = YES;
-			slider1.value = k;
-			slider2.value = p;
-			slider3.value = q;
+			slider1.value = _k;
+			slider2.value = _p;
+			slider3.value = _q;
 		default:
 			break;
 	}
@@ -132,25 +160,25 @@
 - (void)switchGraphs:(id)sender
 {
 	// save current graph parameters
-	parameters[currentGraphNumber][PARAM_A] = a;
-	parameters[currentGraphNumber][PARAM_B] = b;
-	parameters[currentGraphNumber][PARAM_C] = c;
-	parameters[currentGraphNumber][PARAM_K] = k;
-	parameters[currentGraphNumber][PARAM_P] = p;
-	parameters[currentGraphNumber][PARAM_Q] = q;
-	parameters[currentGraphNumber][FORM] = form;
-	parameters[currentGraphNumber][DISPLAY] = display;
+	_parameters[_currentGraphNumber][PARAM_A] = _a;
+	_parameters[_currentGraphNumber][PARAM_B] = _b;
+	_parameters[_currentGraphNumber][PARAM_C] = _c;
+	_parameters[_currentGraphNumber][PARAM_K] = _k;
+	_parameters[_currentGraphNumber][PARAM_P] = _p;
+	_parameters[_currentGraphNumber][PARAM_Q] = _q;
+	_parameters[_currentGraphNumber][FORM] = form;
+	_parameters[_currentGraphNumber][DISPLAY] = display;
 	
 	// switch current graph
-	currentGraphNumber = ((UISegmentedControl *)sender).selectedSegmentIndex;
+	_currentGraphNumber = ((UISegmentedControl *)sender).selectedSegmentIndex;
 	[self drawSubGraph];
 	
 	// set appearance
-	UIColor *tintColor = [UIColor colorWithHue:((double)currentGraphNumber / NUMBER_OF_GRAPHS) saturation:1.0 brightness:0.7 alpha:1.0];
+	UIColor *tintColor = [UIColor colorWithHue:((double)_currentGraphNumber / NUMBER_OF_GRAPHS) saturation:1.0 brightness:0.7 alpha:1.0];
 	[self.displaySwitch setOnTintColor:tintColor];
 	NSArray *subViews = [self.controlView subviews];
 	for (UIView *aSubView in subViews) {
-		if ([aSubView isEqual:graphControl]) {
+		if ([aSubView isEqual:self.graphControl]) {
 			continue;
 		}
 		if ([aSubView respondsToSelector:@selector(setTintColor:)]) {
@@ -171,27 +199,27 @@
 	}
 	
 	// fetch next graph parameters
-	a = parameters[currentGraphNumber][PARAM_A];
-	b = parameters[currentGraphNumber][PARAM_B];
-	c = parameters[currentGraphNumber][PARAM_C];
-	k = parameters[currentGraphNumber][PARAM_K];
-	p = parameters[currentGraphNumber][PARAM_P];
-	q = parameters[currentGraphNumber][PARAM_Q];
-	form = parameters[currentGraphNumber][FORM];
-	display = parameters[currentGraphNumber][DISPLAY];
+	_a = _parameters[_currentGraphNumber][PARAM_A];
+	_b = _parameters[_currentGraphNumber][PARAM_B];
+	_c = _parameters[_currentGraphNumber][PARAM_C];
+	_k = _parameters[_currentGraphNumber][PARAM_K];
+	_p = _parameters[_currentGraphNumber][PARAM_P];
+	_q = _parameters[_currentGraphNumber][PARAM_Q];
+	form = _parameters[_currentGraphNumber][FORM];
+	display = _parameters[_currentGraphNumber][DISPLAY];
 	
 	// set fields
-	fieldA.text = [NSString stringWithFormat:@"%2.2f", a];
-	fieldB.text = [NSString stringWithFormat:@"%+2.2f", b];
-	fieldC.text = [NSString stringWithFormat:@"%+2.2f", c];
-	fieldK.text = [NSString stringWithFormat:@"%2.2f", k];
-	fieldP.text = [NSString stringWithFormat:@"%+2.2f", p];
-	fieldQ.text = [NSString stringWithFormat:@"%+2.2f", q];
+	fieldA.text = [NSString stringWithFormat:@"%2.2f", _a];
+	fieldB.text = [NSString stringWithFormat:@"%+2.2f", _b];
+	fieldC.text = [NSString stringWithFormat:@"%+2.2f", _c];
+	fieldK.text = [NSString stringWithFormat:@"%2.2f", _k];
+	fieldP.text = [NSString stringWithFormat:@"%+2.2f", _p];
+	fieldQ.text = [NSString stringWithFormat:@"%+2.2f", _q];
 	
 	// set sliders
-	slider1.value = a;
-	slider2.value = b;
-	slider3.value = c;
+	slider1.value = _a;
+	slider2.value = _b;
+	slider3.value = _c;
 	
 	// set formControl
 	self.formControl.selectedSegmentIndex = form;
@@ -206,32 +234,32 @@
 	switch (self.formControl.selectedSegmentIndex) {
 		case 0:
 			if ([sender isEqual:slider1]) {
-				A = a;
-				a = slider1.value;
-				fieldA.text = [NSString stringWithFormat:@"%2.2f", a];
+				_A = _a;
+				_a = slider1.value;
+				fieldA.text = [NSString stringWithFormat:@"%2.2f", _a];
 			} else if ([sender isEqual:slider2]) {
-				B = b;
-				b = slider2.value;
-				fieldB.text = [NSString stringWithFormat:@"%+2.2f", b];
+				_B = _b;
+				_b = slider2.value;
+				fieldB.text = [NSString stringWithFormat:@"%+2.2f", _b];
 			} else if ([sender isEqual:slider3]) {
-				C = c;
-				c = slider3.value;
-				fieldC.text = [NSString stringWithFormat:@"%+2.2f", c];
+				_C = _c;
+				_c = slider3.value;
+				fieldC.text = [NSString stringWithFormat:@"%+2.2f", _c];
 			}
 			break;
 		case 1:
 			if ([sender isEqual:slider1]) {
-				K = k;
-				k = slider1.value;
-				fieldK.text = [NSString stringWithFormat:@"%2.2f", k];
+				_K = _k;
+				_k = slider1.value;
+				fieldK.text = [NSString stringWithFormat:@"%2.2f", _k];
 			} else if ([sender isEqual:slider2]) {
-				P = p;
-				p = slider2.value;
-				fieldP.text = [NSString stringWithFormat:@"%+2.2f", p];
+				_P = _p;
+				_p = slider2.value;
+				fieldP.text = [NSString stringWithFormat:@"%+2.2f", _p];
 			} else if ([sender isEqual:slider3]) {
-				Q = q;
-				q = slider3.value;
-				fieldQ.text = [NSString stringWithFormat:@"%+2.2f", q];
+				_Q = _q;
+				_q = slider3.value;
+				fieldQ.text = [NSString stringWithFormat:@"%+2.2f", _q];
 			}
 			break;
 		default:
@@ -241,37 +269,37 @@
 
 - (void)forceUpdateEquation
 {
-		a = slider1.value;
-		fieldA.text = [NSString stringWithFormat:@"%2.2f", a];
-		b = slider2.value;
-		fieldB.text = [NSString stringWithFormat:@"%+2.2f", b];
-		c = slider3.value;
-		fieldC.text = [NSString stringWithFormat:@"%+2.2f", c];
-		k = slider1.value;
-		fieldK.text = [NSString stringWithFormat:@"%2.2f", k];
-		p = slider2.value;
-		fieldP.text = [NSString stringWithFormat:@"%+2.2f", p];
-		q = slider3.value;
-		fieldQ.text = [NSString stringWithFormat:@"%+2.2f", q];
+		_a = slider1.value;
+		fieldA.text = [NSString stringWithFormat:@"%2.2f", _a];
+		_b = slider2.value;
+		fieldB.text = [NSString stringWithFormat:@"%+2.2f", _b];
+		_c = slider3.value;
+		fieldC.text = [NSString stringWithFormat:@"%+2.2f", _c];
+		_k = slider1.value;
+		fieldK.text = [NSString stringWithFormat:@"%2.2f", _k];
+		_p = slider2.value;
+		fieldP.text = [NSString stringWithFormat:@"%+2.2f", _p];
+		_q = slider3.value;
+		fieldQ.text = [NSString stringWithFormat:@"%+2.2f", _q];
 }
 
 - (void)updateGraphView
 {
-	if (updating
-		|| (a == A && b == B && c == C && k == K && p == P && q == Q) ) {
+	if (_updating
+		|| (_a == _A && _b == _B && _c == _C && _k == _K && _p == _P && _q == _Q) ) {
 		return;
 	} else {
-		updating = YES;
+		_updating = YES;
 		
 		[self drawMainGraph];
 		
-		A = a;
-		B = b;
-		C = c;
-		K = k;
-		P = p;
-		Q = q;
-		updating = NO;
+		_A = _a;
+		_B = _b;
+		_C = _c;
+		_K = _k;
+		_P = _p;
+		_Q = _q;
+		_updating = NO;
 	}
 }
 
@@ -285,19 +313,19 @@
 
 	CGColorRef plotColor;
 	if (display) {
-		plotColor = [[UIColor colorWithHue:(double)currentGraphNumber / NUMBER_OF_GRAPHS saturation:1.0 brightness:1.0 alpha:1.0] CGColor];
+		plotColor = [[UIColor colorWithHue:(double)_currentGraphNumber / NUMBER_OF_GRAPHS saturation:1.0 brightness:1.0 alpha:1.0] CGColor];
 	} else {
-		plotColor = [[UIColor colorWithHue:(double)currentGraphNumber / NUMBER_OF_GRAPHS saturation:1.0 brightness:1.0 alpha:0.5] CGColor];
+		plotColor = [[UIColor colorWithHue:(double)_currentGraphNumber / NUMBER_OF_GRAPHS saturation:1.0 brightness:1.0 alpha:0.5] CGColor];
 	}
 	
 
 	CGContextSetLineWidth(context, 4.0);
 	switch (self.formControl.selectedSegmentIndex) {
 		case 0: // general form
-			CGContextMoveToPoint(context, 0, -((a * pow(-10, 2) + b * (-10) + c) / valuePerPixel) + self.mainGraphView.frame.size.height / 2.0);
+			CGContextMoveToPoint(context, 0, -((_a * pow(-10, 2) + _b * (-10) + _c) / valuePerPixel) + self.mainGraphView.frame.size.height / 2.0);
 			for (int j = 1; j <= self.mainGraphView.frame.size.width; j += xInterval) {
 				double x = (double)j / self.mainGraphView.frame.size.width * 20.0 - 10;
-				double y = a * pow(x, 2) + b * (x) + c;
+				double y = _a * pow(x, 2) + _b * (x) + _c;
 				double i = -(y / valuePerPixel) + self.mainGraphView.frame.size.height / 2.0;
 				CGContextAddLineToPoint(context, j, i);
 			}
@@ -305,10 +333,10 @@
 			CGContextStrokePath(context);
 			break;
 		case 1: // standard form
-			CGContextMoveToPoint(context, 0, -((k * pow((-10 + p), 2) + q) / valuePerPixel) + self.mainGraphView.frame.size.height / 2.0);
+			CGContextMoveToPoint(context, 0, -((_k * pow((-10 + _p), 2) + _q) / valuePerPixel) + self.mainGraphView.frame.size.height / 2.0);
 			for (int j = 1; j <= self.mainGraphView.frame.size.width; j += xInterval) {
 				double x = (double)j / self.mainGraphView.frame.size.width * 20.0 - 10;
-				double y = k * pow((x + p), 2) + q;
+				double y = _k * pow((x + _p), 2) + _q;
 				double i = -(y / valuePerPixel) + self.mainGraphView.frame.size.height / 2.0;
 				CGContextAddLineToPoint(context, j, i);
 			}
@@ -363,17 +391,17 @@
 	// draw graphs
 	double tempA, tempB, tempC, tempK, tempP, tempQ;
 	for (int i = 0; i < NUMBER_OF_GRAPHS; i++) {
-		if (i == currentGraphNumber
-			|| parameters[i][DISPLAY] == NO) {
+		if (i == _currentGraphNumber
+			|| _parameters[i][DISPLAY] == NO) {
 			continue;
 		}
 		CGColorRef plotColor = [[UIColor colorWithHue:(double)i / NUMBER_OF_GRAPHS saturation:1.0 brightness:1.0 alpha:1.0] CGColor];
 		CGContextSetLineWidth(context, 4.0);
-		switch ((int)(parameters[i][FORM])) {
+		switch ((int)(_parameters[i][FORM])) {
 			case GENERAL_FORM: // general form
-				tempA = parameters[i][PARAM_A];
-				tempB = parameters[i][PARAM_B];
-				tempC = parameters[i][PARAM_C];
+				tempA = _parameters[i][PARAM_A];
+				tempB = _parameters[i][PARAM_B];
+				tempC = _parameters[i][PARAM_C];
 				CGContextMoveToPoint(context, 0, -((tempA * pow(-10, 2) + tempB * (-10) + tempC) / valuePerPixel) + self.mainGraphView.frame.size.height / 2.0);
 				for (int j = 1; j <= self.mainGraphView.frame.size.width; j += xInterval) {
 					double x = (double)j / self.mainGraphView.frame.size.width * 20.0 - 10;
@@ -385,9 +413,9 @@
 				CGContextStrokePath(context);
 				break;
 			case STANDARD_FORM: // standard form
-				tempK = parameters[i][PARAM_K];
-				tempP = parameters[i][PARAM_P];
-				tempQ = parameters[i][PARAM_Q];
+				tempK = _parameters[i][PARAM_K];
+				tempP = _parameters[i][PARAM_P];
+				tempQ = _parameters[i][PARAM_Q];
 				CGContextMoveToPoint(context, 0, -((tempK * pow((-10 + tempP), 2) + tempQ) / valuePerPixel) + self.mainGraphView.frame.size.height / 2.0);
 				for (int j = 1; j <= self.mainGraphView.frame.size.width; j += xInterval) {
 					double x = (double)j / self.mainGraphView.frame.size.width * 20.0 - 10;
@@ -433,34 +461,34 @@
 	}];
 		
 	if ([textField isEqual:fieldA]) {
-		A = a;
-		a = [textField.text doubleValue];
-		slider1.value = a;
+		_A = _a;
+		_a = [textField.text doubleValue];
+		slider1.value = _a;
 		[self updateEquation:slider1];
 	} else if ([textField isEqual:fieldB]) {
-		B = b;
-		b = [textField.text doubleValue];
-		slider2.value = b;
+		_B = _b;
+		_b = [textField.text doubleValue];
+		slider2.value = _b;
 		[self updateEquation:slider2];
 	} else if ([textField isEqual:fieldC]) {
-		C = c;
-		c = [textField.text doubleValue];
-		slider3.value = c;
+		_C = _c;
+		_c = [textField.text doubleValue];
+		slider3.value = _c;
 		[self updateEquation:slider3];
 	} else if ([textField isEqual:fieldK]) {
-		K = k;
-		k = [textField.text doubleValue];
-		slider1.value = k;
+		_K = _k;
+		_k = [textField.text doubleValue];
+		slider1.value = _k;
 		[self updateEquation:slider1];
 	} else if ([textField isEqual:fieldP]) {
-		P = p;
-		p = [textField.text doubleValue];
-		slider2.value = p;
+		_P = _p;
+		_p = [textField.text doubleValue];
+		slider2.value = _p;
 		[self updateEquation:slider2];
 	} else if ([textField isEqual:fieldQ]) {
-		Q = q;
-		q = [textField.text doubleValue];
-		slider3.value = q;
+		_Q = _q;
+		_q = [textField.text doubleValue];
+		slider3.value = _q;
 		[self updateEquation:slider3];
 	}
 	[self drawMainGraph];
