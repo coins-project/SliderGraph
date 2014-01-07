@@ -27,7 +27,7 @@
 
 @property (weak, nonatomic) IBOutlet UIView *controlView;
 
-@property (weak, nonatomic) IBOutlet COINSKeyboard *keyboardView;
+@property COINSKeyboard *keyboardView;
 @property (weak, nonatomic) IBOutlet UISwitch *displaySwitch; // display or hide
 
 @property (weak, nonatomic) IBOutlet UIView *generalFormView;
@@ -99,10 +99,13 @@
 	}
 	
 	// prepare keyboard
-	NSArray *keyTopTitles = @[@"0", @"1", @"2", @"3", @"4", @".", @"x", @"5", @"6", @"7", @"8", @"9", @"OK", @"OK"];
-	NSArray *mergeInfo = @[@[@12,@13]];
-	[self.keyboardView updateButtonsWithRow:2 column:7 titles:keyTopTitles outCharacters:@"01234.x56789kk" mergeInfo:mergeInfo style:COINSKeyboardStyleiOS7];
-	self.keyboardView.hidden = YES; // DEBUG
+//	self.keyboardView = [[COINSKeyboard alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 200)];
+//	NSArray *keyTopTitles = @[@"0", @"1", @"2", @"3", @"4", @".", @"x", @"5", @"6", @"7", @"8", @"9", @"OK", @"OK"];
+//	NSArray *mergeInfo = @[@[@12,@13]];
+//	[self.keyboardView updateButtonsWithRow:2 column:7 titles:keyTopTitles outCharacters:@"01234.x56789kk" style:COINSKeyboardStyleiOS7];
+//	[self.keyboardView mergeButtons:mergeInfo];
+////	self.keyboardView.hidden = YES; // DEBUG
+//	fieldA.inputView = self.keyboardView;
 	
 	
 	NSTimer *timer = [NSTimer timerWithTimeInterval:0.03
@@ -115,6 +118,8 @@
 	_showGrid = YES;
 	
 	[self forceUpdateEquation];
+	
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -440,7 +445,8 @@
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
-	[self.keyboardView updateButtonsWithRow:self.keyboardView.row column:self.keyboardView.column titles:self.keyboardView.titles outCharacters:self.keyboardView.outCharacters mergeInfo:self.keyboardView.mergeInfo style:self.keyboardView.style];
+	[self.keyboardView updateButtonsWithFrame:self.keyboardView.frame Row:self.keyboardView.row column:self.keyboardView.column titles:self.keyboardView.titles outCharacters:self.keyboardView.outCharacters style:self.keyboardView.style];
+	[self.keyboardView mergeButtons:self.keyboardView.mergeInfo];
 	[self drawSubGraph];
 	[self drawMainGraph];
 }

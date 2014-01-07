@@ -15,6 +15,8 @@
 */
 
 #import <UIKit/UIKit.h>
+#import "UIButton+BGColor.h"
+
 
 typedef enum COINSKeyboardStyle {
 	COINSKeyboardStyleiOS7 = 0,
@@ -22,28 +24,49 @@ typedef enum COINSKeyboardStyle {
 	COINSKeyboardStylePinkCircle,
 	COINSKeyboardStyleBlueCircle,
 	COINSKeyboardStyleDefault = COINSKeyboardStyleiOS7,
-	} COINSKeyboardStyle;
+} COINSKeyboardStyle;
 
 @protocol COINSKeyboardDelegate <NSObject>
-
 - (void)input:(unichar)c;
-
 @end
 
 
 @interface COINSKeyboard : UIView
 
-@property id<COINSKeyboardDelegate> delegate;
+@property id <COINSKeyboardDelegate> delegate;
 @property UIEdgeInsets buttonInset;
 
 @property (readonly) NSUInteger row;
 @property (readonly) NSUInteger column;
 @property (readonly) NSArray *titles;
 @property (readonly) NSString *outCharacters;
-@property (readonly) NSArray *mergeInfo;
 @property (readonly) COINSKeyboardStyle style;
 
-- (void)updateButtonsWithRow:(NSUInteger)r column:(NSUInteger)c titles:(NSArray *)t outCharacters:(NSString *)o mergeInfo:(NSArray *)m style:(COINSKeyboardStyle)s;
+@property (readonly) NSArray *mergeInfo;
+
+@property UIButton *aButton;
+
++ (id)keyboardWithFrame:(CGRect)frame
+					Row:(NSUInteger)row
+				 column:(NSUInteger)column
+				 titles:(NSArray *)titles
+		  outCharacters:(NSString *)characters
+				  style:(COINSKeyboardStyle)style;
+
+- (id)initWithFrame:(CGRect)frame
+				Row:(NSUInteger)row
+			 column:(NSUInteger)column
+			 titles:(NSArray *)titles
+	  outCharacters:(NSString *)characters
+			  style:(COINSKeyboardStyle)style;
+
+- (void)updateButtonsWithFrame:(CGRect)frame
+						   Row:(NSUInteger)row
+						column:(NSUInteger)column
+						titles:(NSArray *)titles
+				 outCharacters:(NSString *)characters
+						 style:(COINSKeyboardStyle)style;
+
+- (void)mergeButtons:(NSArray *)mergeInfo;
 
 @end
-
