@@ -32,12 +32,9 @@
 
 }
 
-@synthesize keyboardView;
-@synthesize displaySwitch;
 @synthesize generalFormView, standardFormView;
 @synthesize fieldA, fieldB, fieldC, fieldK, fieldP, fieldQ;
 @synthesize slider1, slider2, slider3;
-@synthesize formControl;
 @synthesize graphControl;
 
 - (void)viewDidLoad
@@ -45,7 +42,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
 	
-//	displaySwitch.transform = CGAffineTransformMakeRotation(-M_PI_2);
+//	self.displaySwitch.transform = CGAffineTransformMakeRotation(-M_PI_2);
 	
 	[graphControl addTarget:self action:@selector(switchGraphs:) forControlEvents:UIControlEventValueChanged];
 	[self switchGraphs:graphControl];
@@ -59,16 +56,16 @@
 	[slider1 addTarget:self action:@selector(updateEquation:) forControlEvents:UIControlEventValueChanged];
 	[slider2 addTarget:self action:@selector(updateEquation:) forControlEvents:UIControlEventValueChanged];
 	[slider3 addTarget:self action:@selector(updateEquation:) forControlEvents:UIControlEventValueChanged];
-	[formControl addTarget:self action:@selector(changeForm:) forControlEvents:UIControlEventValueChanged];
+	[self.formControl addTarget:self action:@selector(changeForm:) forControlEvents:UIControlEventValueChanged];
 	
 	// set default value
 	a = slider1.value = 1.0;
 	b = slider2.value = 0.0;
 	c = slider3.value = 0.0;
 	form = GENERAL_FORM;
-	displaySwitch.on = display = YES;
-	formControl.selectedSegmentIndex = 0;
-	[self changeForm:formControl];
+	self.displaySwitch.on = display = YES;
+	self.formControl.selectedSegmentIndex = 0;
+	[self changeForm:self.formControl];
 	for (int i = 1; i < NUMBER_OF_GRAPHS; i++) {
 		parameters[i][DISPLAY] = NO;
 	}
@@ -76,8 +73,8 @@
 	// prepare keyboard
 	NSArray *keyTopTitles = @[@"0", @"1", @"2", @"3", @"4", @".", @"x", @"5", @"6", @"7", @"8", @"9", @"OK", @"OK"];
 	NSArray *mergeInfo = @[@[@12,@13]];
-	[keyboardView updateButtonsWithRow:2 column:7 titles:keyTopTitles outCharacters:@"01234.x56789kk" mergeInfo:mergeInfo style:COINSKeyboardStyleiOS7];
-	keyboardView.hidden = YES; // DEBUG
+	[self.keyboardView updateButtonsWithRow:2 column:7 titles:keyTopTitles outCharacters:@"01234.x56789kk" mergeInfo:mergeInfo style:COINSKeyboardStyleiOS7];
+	self.keyboardView.hidden = YES; // DEBUG
 	
 	
 	NSTimer *timer = [NSTimer timerWithTimeInterval:0.03
@@ -150,7 +147,7 @@
 	
 	// set appearance
 	UIColor *tintColor = [UIColor colorWithHue:((double)currentGraphNumber / NUMBER_OF_GRAPHS) saturation:1.0 brightness:0.7 alpha:1.0];
-	[displaySwitch setOnTintColor:tintColor];
+	[self.displaySwitch setOnTintColor:tintColor];
 	NSArray *subViews = [self.controlView subviews];
 	for (UIView *aSubView in subViews) {
 		if ([aSubView isEqual:graphControl]) {
@@ -197,16 +194,16 @@
 	slider3.value = c;
 	
 	// set formControl
-	formControl.selectedSegmentIndex = form;
-	[self changeForm:formControl];
-	displaySwitch.on = display;
+	self.formControl.selectedSegmentIndex = form;
+	[self changeForm:self.formControl];
+	self.displaySwitch.on = display;
 	
 	[self drawMainGraph];
 }
 
 - (void)updateEquation:(id)sender
 {
-	switch (formControl.selectedSegmentIndex) {
+	switch (self.formControl.selectedSegmentIndex) {
 		case 0:
 			if ([sender isEqual:slider1]) {
 				A = a;
@@ -295,7 +292,7 @@
 	
 
 	CGContextSetLineWidth(context, 4.0);
-	switch (formControl.selectedSegmentIndex) {
+	switch (self.formControl.selectedSegmentIndex) {
 		case 0: // general form
 			CGContextMoveToPoint(context, 0, -((a * pow(-10, 2) + b * (-10) + c) / valuePerPixel) + self.mainGraphView.frame.size.height / 2.0);
 			for (int j = 1; j <= self.mainGraphView.frame.size.width; j += xInterval) {
@@ -415,7 +412,7 @@
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
-	[keyboardView updateButtonsWithRow:keyboardView.row column:keyboardView.column titles:keyboardView.titles outCharacters:keyboardView.outCharacters mergeInfo:keyboardView.mergeInfo style:keyboardView.style];
+	[self.keyboardView updateButtonsWithRow:self.keyboardView.row column:self.keyboardView.column titles:self.keyboardView.titles outCharacters:self.keyboardView.outCharacters mergeInfo:self.keyboardView.mergeInfo style:self.keyboardView.style];
 	[self drawSubGraph];
 	[self drawMainGraph];
 }
