@@ -24,6 +24,9 @@
 		431A302D182B506C00AC4E8D /* SliderGraphTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 431A302C182B506C00AC4E8D /* SliderGraphTests.m */; };
 		4323AC1B187C231500A8D319 /* COINSKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 4323AC1A187C231500A8D319 /* COINSKeyboard.m */; };
 		4323AC1E187C238500A8D319 /* UIButton+BGColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 4323AC1D187C238500A8D319 /* UIButton+BGColor.m */; };
+		438B5FF618C146D6004CEA96 /* UTNumPadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 438B5FF418C146D6004CEA96 /* UTNumPadViewController.m */; };
+		438B5FF718C146D6004CEA96 /* UTNumPadViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 438B5FF518C146D6004CEA96 /* UTNumPadViewController.xib */; };
+		438B5FFA18C146EA004CEA96 /* UTPopoverContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 438B5FF918C146EA004CEA96 /* UTPopoverContext.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,10 +60,15 @@
 		431A3028182B506C00AC4E8D /* SliderGraphTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SliderGraphTests-Info.plist"; sourceTree = "<group>"; };
 		431A302A182B506C00AC4E8D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		431A302C182B506C00AC4E8D /* SliderGraphTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SliderGraphTests.m; sourceTree = "<group>"; };
-		4323AC19187C231500A8D319 /* COINSKeyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COINSKeyboard.h; sourceTree = "<group>"; };
-		4323AC1A187C231500A8D319 /* COINSKeyboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = COINSKeyboard.m; sourceTree = "<group>"; };
+		4323AC19187C231500A8D319 /* COINSKeyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = COINSKeyboard.h; path = ../COINSKeyboard.h; sourceTree = "<group>"; };
+		4323AC1A187C231500A8D319 /* COINSKeyboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = COINSKeyboard.m; path = ../COINSKeyboard.m; sourceTree = "<group>"; };
 		4323AC1C187C238500A8D319 /* UIButton+BGColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+BGColor.h"; sourceTree = "<group>"; };
 		4323AC1D187C238500A8D319 /* UIButton+BGColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+BGColor.m"; sourceTree = "<group>"; };
+		438B5FF318C146D6004CEA96 /* UTNumPadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UTNumPadViewController.h; sourceTree = "<group>"; };
+		438B5FF418C146D6004CEA96 /* UTNumPadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UTNumPadViewController.m; sourceTree = "<group>"; };
+		438B5FF518C146D6004CEA96 /* UTNumPadViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UTNumPadViewController.xib; sourceTree = "<group>"; };
+		438B5FF818C146EA004CEA96 /* UTPopoverContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UTPopoverContext.h; sourceTree = "<group>"; };
+		438B5FF918C146EA004CEA96 /* UTPopoverContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UTPopoverContext.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,7 +98,7 @@
 		431A2FF2182B506B00AC4E8D = {
 			isa = PBXGroup;
 			children = (
-				4372FC7718346545002816B1 /* View */,
+				438B5FA818C12F9B004CEA96 /* Libraries */,
 				431A3004182B506B00AC4E8D /* SliderGraph */,
 				431A3026182B506C00AC4E8D /* SliderGraphTests */,
 				431A2FFD182B506B00AC4E8D /* Frameworks */,
@@ -121,6 +129,7 @@
 		431A3004182B506B00AC4E8D /* SliderGraph */ = {
 			isa = PBXGroup;
 			children = (
+				438B5FF218C146AF004CEA96 /* NumPad */,
 				4323AC1C187C238500A8D319 /* UIButton+BGColor.h */,
 				4323AC1D187C238500A8D319 /* UIButton+BGColor.m */,
 				431A300D182B506B00AC4E8D /* USKAppDelegate.h */,
@@ -164,13 +173,26 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		4372FC7718346545002816B1 /* View */ = {
+		438B5FA818C12F9B004CEA96 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				438B5FF818C146EA004CEA96 /* UTPopoverContext.h */,
+				438B5FF918C146EA004CEA96 /* UTPopoverContext.m */,
 				4323AC19187C231500A8D319 /* COINSKeyboard.h */,
 				4323AC1A187C231500A8D319 /* COINSKeyboard.m */,
 			);
-			name = View;
+			name = Libraries;
+			path = SliderGraph;
+			sourceTree = "<group>";
+		};
+		438B5FF218C146AF004CEA96 /* NumPad */ = {
+			isa = PBXGroup;
+			children = (
+				438B5FF318C146D6004CEA96 /* UTNumPadViewController.h */,
+				438B5FF418C146D6004CEA96 /* UTNumPadViewController.m */,
+				438B5FF518C146D6004CEA96 /* UTNumPadViewController.xib */,
+			);
+			name = NumPad;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -253,6 +275,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				438B5FF718C146D6004CEA96 /* UTNumPadViewController.xib in Resources */,
 				431A3015182B506B00AC4E8D /* Main_iPad.storyboard in Resources */,
 				431A301A182B506B00AC4E8D /* Images.xcassets in Resources */,
 				431A3012182B506B00AC4E8D /* Main_iPhone.storyboard in Resources */,
@@ -276,9 +299,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				431A3018182B506B00AC4E8D /* USKViewController.m in Sources */,
+				438B5FFA18C146EA004CEA96 /* UTPopoverContext.m in Sources */,
 				431A300F182B506B00AC4E8D /* USKAppDelegate.m in Sources */,
 				431A300B182B506B00AC4E8D /* main.m in Sources */,
 				4323AC1B187C231500A8D319 /* COINSKeyboard.m in Sources */,
+				438B5FF618C146D6004CEA96 /* UTNumPadViewController.m in Sources */,
 				4323AC1E187C238500A8D319 /* UIButton+BGColor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

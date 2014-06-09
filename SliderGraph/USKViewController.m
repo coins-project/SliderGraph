@@ -7,8 +7,11 @@
 //
 
 #import "USKViewController.h"
+#import "UTPopoverContext.h"
+#import "UTNumPadViewController.h"
 
 #define NUMBER_OF_GRAPHS 5
+
 #define PARAM_A 0
 #define PARAM_B 1
 #define PARAM_C 2
@@ -17,10 +20,11 @@
 #define PARAM_Q 5
 #define FORM 6
 #define DISPLAY 7
+
 #define GENERAL_FORM 0
 #define STANDARD_FORM 1
 
-@interface USKViewController ()
+@interface USKViewController () <UTNumPadViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *mainGraphView; // display editing graph
 @property (weak, nonatomic) IBOutlet UIImageView *subGraphView; // display the others graph, axis and grid.
@@ -31,10 +35,21 @@
 @property (weak, nonatomic) IBOutlet UISwitch *displaySwitch; // display or hide
 
 @property (weak, nonatomic) IBOutlet UIView *generalFormView;
-@property (weak, nonatomic) IBOutlet UITextField *fieldA;
-@property (weak, nonatomic) IBOutlet UITextField *fieldB;
-@property (weak, nonatomic) IBOutlet UITextField *fieldC;
 @property (weak, nonatomic) IBOutlet UIView *standardFormView;
+
+@property (weak, nonatomic) IBOutlet UIView *varView1;
+@property (weak, nonatomic) IBOutlet UILabel *varLabel1;
+@property (weak, nonatomic) IBOutlet UIButton *varButton1;
+
+@property (weak, nonatomic) IBOutlet UIView *varView2;
+@property (weak, nonatomic) IBOutlet UILabel *varLabel2;
+@property (weak, nonatomic) IBOutlet UIButton *varButton2;
+
+@property (weak, nonatomic) IBOutlet UIView *varView3;
+@property (weak, nonatomic) IBOutlet UILabel *varLabel3;
+@property (weak, nonatomic) IBOutlet UIButton *varButton3;
+
+
 @property (weak, nonatomic) IBOutlet UITextField *fieldK;
 @property (weak, nonatomic) IBOutlet UITextField *fieldP;
 @property (weak, nonatomic) IBOutlet UITextField *fieldQ;
@@ -59,10 +74,12 @@
 	
 	double _parameters[NUMBER_OF_GRAPHS][8]; // 6 ... a, b, c, k, p, q, form, display,
 	NSUInteger _currentGraphNumber;
+    
+    UILabel *_currentSelectedLabel;
 }
 
 @synthesize generalFormView, standardFormView;
-@synthesize fieldA, fieldB, fieldC, fieldK, fieldP, fieldQ;
+@synthesize fieldK, fieldP, fieldQ;
 @synthesize slider1, slider2, slider3;
 
 - (void)viewDidLoad
@@ -214,9 +231,9 @@
 	display = _parameters[_currentGraphNumber][DISPLAY];
 	
 	// set fields
-	fieldA.text = [NSString stringWithFormat:@"%2.2f", _a];
-	fieldB.text = [NSString stringWithFormat:@"%+2.2f", _b];
-	fieldC.text = [NSString stringWithFormat:@"%+2.2f", _c];
+	self.varLabel1.text = [NSString stringWithFormat:@"%2.2f", _a];
+	self.varLabel2.text = [NSString stringWithFormat:@"%+2.2f", _b];
+	self.varLabel3.text = [NSString stringWithFormat:@"%+2.2f", _c];
 	fieldK.text = [NSString stringWithFormat:@"%2.2f", _k];
 	fieldP.text = [NSString stringWithFormat:@"%+2.2f", _p];
 	fieldQ.text = [NSString stringWithFormat:@"%+2.2f", _q];
@@ -241,15 +258,15 @@
 			if ([sender isEqual:slider1]) {
 				_A = _a;
 				_a = slider1.value;
-				fieldA.text = [NSString stringWithFormat:@"%2.2f", _a];
+				self.varLabel1.text = [NSString stringWithFormat:@"%2.2f", _a];
 			} else if ([sender isEqual:slider2]) {
 				_B = _b;
 				_b = slider2.value;
-				fieldB.text = [NSString stringWithFormat:@"%+2.2f", _b];
+				self.varLabel2.text = [NSString stringWithFormat:@"%+2.2f", _b];
 			} else if ([sender isEqual:slider3]) {
 				_C = _c;
 				_c = slider3.value;
-				fieldC.text = [NSString stringWithFormat:@"%+2.2f", _c];
+				self.varLabel3.text = [NSString stringWithFormat:@"%+2.2f", _c];
 			}
 			break;
 		case 1:
@@ -275,11 +292,11 @@
 - (void)forceUpdateEquation
 {
 		_a = slider1.value;
-		fieldA.text = [NSString stringWithFormat:@"%2.2f", _a];
+		self.varLabel1.text = [NSString stringWithFormat:@"%2.2f", _a];
 		_b = slider2.value;
-		fieldB.text = [NSString stringWithFormat:@"%+2.2f", _b];
+		self.varLabel2.text = [NSString stringWithFormat:@"%+2.2f", _b];
 		_c = slider3.value;
-		fieldC.text = [NSString stringWithFormat:@"%+2.2f", _c];
+		self.varLabel3.text = [NSString stringWithFormat:@"%+2.2f", _c];
 		_k = slider1.value;
 		fieldK.text = [NSString stringWithFormat:@"%2.2f", _k];
 		_p = slider2.value;
@@ -320,7 +337,7 @@
 	if (display) {
 		plotColor = [[UIColor colorWithHue:(double)_currentGraphNumber / NUMBER_OF_GRAPHS saturation:1.0 brightness:1.0 alpha:1.0] CGColor];
 	} else {
-		plotColor = [[UIColor colorWithHue:(double)_currentGraphNumber / NUMBER_OF_GRAPHS saturation:1.0 brightness:1.0 alpha:0.5] CGColor];
+		plotColor = [[UIColor colorWithHue:(double)_currentGraphNumber / NUMBER_OF_GRAPHS saturation:1.0 brightness:1.0 alpha:0.0] CGColor];
 	}
 	
 
@@ -451,60 +468,41 @@
 	[self drawMainGraph];
 }
 
-- (void)textFieldDidBeginEditing:(UITextField *)textField
-{
-	[UIView animateWithDuration:0.3 animations:^{
-		self.controlView.frame = CGRectMake(self.controlView.frame.origin.x, self.controlView.frame.origin.y - 200, self.controlView.frame.size.width, self.controlView.frame.size.height);
-	}];
-}
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-	[textField resignFirstResponder];
-	
-	[UIView animateWithDuration:0.3 animations:^{
-		self.controlView.frame = CGRectMake(self.controlView.frame.origin.x, self.controlView.frame.origin.y + 200, self.controlView.frame.size.width, self.controlView.frame.size.height);
-	}];
-		
-	if ([textField isEqual:fieldA]) {
-		_A = _a;
-		_a = [textField.text doubleValue];
-		slider1.value = _a;
-		[self updateEquation:slider1];
-	} else if ([textField isEqual:fieldB]) {
-		_B = _b;
-		_b = [textField.text doubleValue];
-		slider2.value = _b;
-		[self updateEquation:slider2];
-	} else if ([textField isEqual:fieldC]) {
-		_C = _c;
-		_c = [textField.text doubleValue];
-		slider3.value = _c;
-		[self updateEquation:slider3];
-	} else if ([textField isEqual:fieldK]) {
-		_K = _k;
-		_k = [textField.text doubleValue];
-		slider1.value = _k;
-		[self updateEquation:slider1];
-	} else if ([textField isEqual:fieldP]) {
-		_P = _p;
-		_p = [textField.text doubleValue];
-		slider2.value = _p;
-		[self updateEquation:slider2];
-	} else if ([textField isEqual:fieldQ]) {
-		_Q = _q;
-		_q = [textField.text doubleValue];
-		slider3.value = _q;
-		[self updateEquation:slider3];
-	}
-	[self drawMainGraph];
-	return YES;
-}
-
 - (IBAction)changeDisplay:(id)sender {
 	UISwitch *aSwitch = sender;
 	display = aSwitch.on;
 	[self drawMainGraph];
 }
+
+- (IBAction)presentNumPad:(id)sender {
+    UIButton *button = sender;
+    if ([button isEqual:_varButton1]) {
+        _currentSelectedLabel = _varLabel1;
+    } else if ([button isEqual:_varButton2]) {
+        _currentSelectedLabel = _varLabel2;
+    } else if ([button isEqual:_varButton3]) {
+        _currentSelectedLabel = _varLabel3;
+    }
+    
+    UTPopoverContext *popoverContext = [UTPopoverContext sharedPopoverContext];
+    UTNumPadViewController *contentViewController = [[UTNumPadViewController alloc] initWithNibName:@"UTNumPadViewController" bundle:[NSBundle mainBundle]];
+    contentViewController.delegate = self;
+    [popoverContext presentPopoverWithContentViewController:contentViewController fromRect:button.frame inView:generalFormView permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+}
+
+#pragma mark - UTNumPadViewControllerDelegate
+
+- (void)numPadDidDisappear:(UTNumPadViewController *)numPad
+{
+    _currentSelectedLabel.text = numPad.numberString;
+    if ([_currentSelectedLabel isEqual:_varLabel1]) {
+        _a = [_currentSelectedLabel.text doubleValue];
+    } else if ([_currentSelectedLabel isEqual:_varLabel2]) {
+        _b = [_currentSelectedLabel.text doubleValue];
+    } else if ([_currentSelectedLabel isEqual:_varLabel3]) {
+        _c = [_currentSelectedLabel.text doubleValue];
+    }
+}
+
 
 @end
